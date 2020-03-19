@@ -1,0 +1,7 @@
+// manifest
+{
+  manifest_version: 1,
+  name: TSPi Appian Developer Tools,
+  version: "1.0",
+  description: "Helpful tools for developing in Appian"
+}
