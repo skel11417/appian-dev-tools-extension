@@ -11,14 +11,14 @@ let ticket = window.prompt(
 
 const formatDate = () => {
   let today = new Date()
-  let date = today.getDate()
-  let month = today.getMonth() + 1
-  let year = today.getFullYear()
-  return `${year}-${month}-${date}`
+  let dd  = (today.getDate() < 10 ? '0' : '') + today.getDate();
+  let month = ((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1);
+  let yyyy = today.getFullYear()
+  return (yyyy + "-" + month + "-" + dd);
 }
 
 let date = formatDate()
-
+console.log("This is working")
 document.activeElement.value=
 `/*
   ${ruleName}(

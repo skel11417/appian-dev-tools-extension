@@ -4,7 +4,9 @@ contextMenus.createRuleDocumentation =
   chrome.contextMenus.create(
     {
       "title": "Create Rule Documentation",
-      "contexts": ["editable"]
+      "contexts": ["editable","page"],
+      "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+
     },
     function(){
       if(chrome.runtime.lastError){
