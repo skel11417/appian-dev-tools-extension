@@ -1,4 +1,4 @@
-// generateDocumentation.js
+// generateRuleComments.js
 
 chrome.storage.local.get('developerName', function (result) {
 
@@ -17,7 +17,7 @@ chrome.storage.local.get('developerName', function (result) {
     })
   }
 
-  // generateDocumentation
+  // generateRuleComments
   let ruleName = document.querySelector(
     ".TitleText---page_header"
   ).innerText

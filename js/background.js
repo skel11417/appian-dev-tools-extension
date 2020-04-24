@@ -19,7 +19,7 @@ function contextMenuHandler(info, tab){
   switch (info.menuItemId) {
     case contextMenus.createRuleDocumentation:
       chrome.tabs.executeScript({
-        file: 'js/generateDocumentation.js'
+        file: 'js/generateRuleComments.js'
       })
       break;
     // default:
