@@ -18,14 +18,16 @@ chrome.storage.local.get('developerName', function (result) {
   }
 
   // generateRuleComments
-  let ruleName = document.querySelector(
-    ".TitleText---page_header"
-  ).innerText
-
   let ticket = window.prompt(
     "Ticket number for this object",
     // default response
-    "NO TICKET"
+    ""
+  );
+
+  let priorVersion = window.prompt(
+    "Version Prior to Change",
+    // default response
+    ""
   );
 
   let formatDate = () => {
@@ -39,22 +41,7 @@ chrome.storage.local.get('developerName', function (result) {
   let date = formatDate()
 
   document.activeElement.value=
-  `/*
-  ${ruleName}(
-
-  )
-*/
-
-
-
-
-/*
-////////////////////////////// CHANGE LOG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-<${date}><${ticket}><${developerName}>
-  --Created
-
-*/
-`
+`<${date}><${ticket}><${developerName}><Version Prior to Change: ${priorVersion}>
+  -- `
 
 })

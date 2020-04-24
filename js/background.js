@@ -1,12 +1,12 @@
 const contextMenus = {};
 
-contextMenus.createRuleDocumentation =
+// Create Rule Comments
+contextMenus.generateRuleComments =
   chrome.contextMenus.create(
     {
-      "title": "Create Rule Documentation",
+      "title": "Generate Rule Comments",
       "contexts": ["editable","page"],
       "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
-
     },
     function(){
       if(chrome.runtime.lastError){
@@ -15,11 +15,31 @@ contextMenus.createRuleDocumentation =
     }
   )
 
+  // Create Changelog Entry
+  contextMenus.generateChangeLogEntry =
+    chrome.contextMenus.create(
+      {
+        "title": "Generate Changelog Entry",
+        "contexts": ["editable","page"],
+        "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+      },
+      function(){
+        if(chrome.runtime.lastError){
+          console.log(chrome.runtime.lastError.message)
+        }
+      }
+    )
+
 function contextMenuHandler(info, tab){
   switch (info.menuItemId) {
-    case contextMenus.createRuleDocumentation:
+    case contextMenus.generateRuleComments:
       chrome.tabs.executeScript({
         file: 'js/generateRuleComments.js'
+      })
+      break;
+    case contextMenus.generateChangeLogEntry:
+      chrome.tabs.executeScript({
+        file: 'js/generateChangeLogEntry.js'
       })
       break;
     // default:
