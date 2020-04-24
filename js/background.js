@@ -28,3 +28,25 @@ function contextMenuHandler(info, tab){
 
 // click event listener
 chrome.contextMenus.onClicked.addListener(contextMenuHandler)
+
+// Open new tab and show rfr
+chrome.runtime.onMessage.addListener(function (message){
+    if (message.type === "open") {
+      chrome.tabs.create(
+        { url: chrome.runtime.getURL("rfr_viewer.html") },
+        function ( tab ) {
+          var handler = function(tabId, changeInfo) {
+            if(tabId === tab.id && changeInfo.status === "complete"){
+              chrome.tabs.onUpdated.removeListener(handler);
+              chrome.tabs.sendMessage(tabId, {data: message.data});
+            }
+          }
+          // in case we're faster than page load (usually):
+        chrome.tabs.onUpdated.addListener(handler);
+        // just in case we're too late with the listener:
+        chrome.tabs.sendMessage(tab.id, {data: message.data});
+        }
+      );
+    }
+  }
+)
