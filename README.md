@@ -18,3 +18,4 @@ A chrome extension for Appian developers at TSPi
 * **Generate Change Log Entry** You can now add a single change log entry to your code.
 * **Create RFR Button (Object List)** While viewing the contents of an App, you can click the *Create RFR* button in the Development Tool popup and get a markup formatted list of all the objects available in a new window.
 * **Developer name is now longer hard coded** The user will be prompted to enter a developer name the first time they use either *Generate Rule Comments* or *Generate Change Log Entry*.
+* **Added favicon** Styling!
