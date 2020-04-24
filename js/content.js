@@ -4,8 +4,8 @@ chrome.runtime.onMessage.addListener(function(request){
   if (request === 'create'){
     let value = getSelectionText()
     chrome.storage.local.set({test_1: value}, function() {
+      let data = renderObjectsArray(getAllObjectsOnPage())
       console.log('Value is set to ' + value);
-      let data = value
       chrome.runtime.sendMessage({type: 'open', data: data})
     })
   }

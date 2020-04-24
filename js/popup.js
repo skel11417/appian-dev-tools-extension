@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function(){
   document.querySelector('#btn-create-rfr').addEventListener('click', () => onclick('create'), false)
 
   // Load the existing RFR for the app
-  document.querySelector('#btn-load-rfr').addEventListener('click', () => onclick('load'), false)
+  // document.querySelector('#btn-load-rfr').addEventListener('click', () => onclick('load'), false)
 
   function onclick (message) {
     chrome.tabs.query({currentWindow: true, active: true},

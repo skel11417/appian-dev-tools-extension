@@ -53,7 +53,7 @@ chrome.contextMenus.onClicked.addListener(contextMenuHandler)
 chrome.runtime.onMessage.addListener(function (message){
     if (message.type === "open") {
       chrome.tabs.create(
-        { url: chrome.runtime.getURL("rfr_viewer.html") },
+        { url: chrome.runtime.getURL("rfr_editor.html") },
         function ( tab ) {
           var handler = function(tabId, changeInfo) {
             if(tabId === tab.id && changeInfo.status === "complete"){
