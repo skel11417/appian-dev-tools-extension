@@ -32,7 +32,7 @@ document.activeElement.value=
 /*
 ////////////////////////////// CHANGE LOG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-<${date}><${ticket}><Sean Kelly>
+<${date}><${ticket}><${MY_NAME}>
   --Created
 
 */
