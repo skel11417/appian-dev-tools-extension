@@ -13,6 +13,7 @@
       "js": ["js/content.js"]
     }
   ],
+  "icons": {"16": "icon.png"},
   "background": {
     "persistent": true,
     "scripts": ["js/background.js"]
