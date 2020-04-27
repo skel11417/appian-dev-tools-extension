@@ -42,6 +42,7 @@ chrome.storage.local.get('developerName', function (result) {
 
   document.activeElement.value=
 `<${date}><${ticket}><${developerName}><Version Prior to Change: ${priorVersion}>
-  -- `
+  --
+  `
 
 })
