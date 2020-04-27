@@ -51,7 +51,7 @@ chrome.contextMenus.onClicked.addListener(contextMenuHandler)
 
 // Open new tab and show rfr
 chrome.runtime.onMessage.addListener(function (message){
-    if (message.type === "open") {
+    if (message.type === "openRFREditor") {
       chrome.tabs.create(
         { url: chrome.runtime.getURL("rfr_editor.html") },
         function ( tab ) {

@@ -7,6 +7,7 @@ chrome.storage.local.get('developerName', function (result) {
   if (result.developerName){
     developerName = result.developerName
   } else {
+    // Get the developer's name via a prompt
     developerName = window.prompt(
       "Enter your name",
       "No Name"

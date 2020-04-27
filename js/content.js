@@ -1,14 +1,41 @@
 chrome.runtime.onMessage.addListener(function(request){
 
-  // Execute Code to Create an RFR
+  // Execute Code to load developer name and Create an RFR
   if (request === 'create'){
-    let value = getSelectionText()
-    chrome.storage.local.set({test_1: value}, function() {
-      let data = renderObjectsArray(getAllObjectsOnPage())
-      console.log('Value is set to ' + value);
-      chrome.runtime.sendMessage({type: 'open', data: data})
+    chrome.storage.local.get('developerName', function (result) {
+      let developerName
+      if (result.developerName){
+        developerName = result.developerName
+      } else {
+        // Get the developer's name via a prompt
+        developerName = window.prompt(
+          "Enter your name",
+          "No Name"
+        )
+        // Save the name
+        chrome.storage.local.set({developerName: developerName}, function() {
+          console.log('Developer name set to ' + developerName);
+        })
+      }
+
+      let objectsArray = getAllObjectsOnPage()
+      let applicationName = getApplicationName()
+      let applicationLink = getApplicationLink()
+      let jiraTicket = getTicketFromApplicationName(applicationName)
+
+      
+      let data = renderRFR({
+        developerName: developerName,
+        objectsArray: objectsArray,
+        applicationName: applicationName,
+        applicationLink: applicationLink,
+        jiraTicket: jiraTicket
+      })
+
+      chrome.runtime.sendMessage({type: 'openRFREditor', data: data})
     })
   }
+
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {

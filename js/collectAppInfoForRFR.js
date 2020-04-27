@@ -61,12 +61,61 @@ function sortObjects (objectsArray) {
 
 // renderObjects
 function renderObjectsArray (objectsArray) {
-  let outputString = `h2.Change Log
-||Object Type||Object Name||Change List||
-`
+  let outputString = ""
   const sortedArray = sortObjects(objectsArray)
   const formattedRows = sortedArray.map(object => `|${object.objectType}|${object.objectName}|* Created|`)
   formattedRows.forEach(row => {outputString += row + "\n"})
-  outputString += "{panel}"
   return outputString
+}
+
+// getApplicationName
+function getApplicationName () {
+  return document.querySelector(".TitleText---page_header").innerText
+}
+
+// getTicketFromApplicationName
+function getTicketFromApplicationName (applicationName) {
+  let ticketNameRegex = /([A-Z]+)\s.+-(\d+)/
+  let matches = applicationName.match(ticketNameRegex)
+
+  return matches[1] + "-" + matches[2]
+}
+
+// getApplicationLink
+function getApplicationLink () {
+  return window.location.href
+}
+
+// renderRFR
+function renderRFR (rfrParameters) {
+  return `{panel:title=Ready For Review:${rfrParameters.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
+h2.Ticket Summary
+|Developers|${rfrParameters.developerName}
+|
+|Functional Solution|
+|
+|Technical Solution|
+|
+|Testing Considerations|
+|
+|Deployment Information|* Application: [${rfrParameters.applicationName}|${rfrParameters.applicationLink}]
+* Builds Required:
+* Pull Request:
+* Additional Information:
+|
+
+
+
+h2.Checklist
+|Unit Tested?|()|
+|Test Case Created?|()|
+|Broken Instances Deleted?|()|
+|Reference Data Helper Updated?|()|
+|Data Dictionary Updated?|()|
+
+
+
+h2.Change Log
+||Object Type||Object Name||Change List||
+${renderObjectsArray(rfrParameters.objectsArray)}{panel}`
 }

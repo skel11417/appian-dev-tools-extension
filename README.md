@@ -14,6 +14,13 @@ A chrome extension for Appian developers at TSPi
 
 ### Changelog
 
+#### Version 1.2
+* **Full RFR Template Generation** Clicking *Create RFR* in the Development Tool popup while in an Appian application now generates a full RFR template including:
+  * The Application Name (with a formatted link to the application)
+  * The Jira ticket for the application
+  * The developer's name
+  * All of the objects on the current page of the application (apps with more than 25 objects not yet supported)
+
 #### Version 1.1
 * **Generate Change Log Entry** You can now add a single change log entry to your code.
 * **Create RFR Button (Object List)** While viewing the contents of an App, you can click the *Create RFR* button in the Development Tool popup and get a markup formatted list of all the objects available in a new window.
