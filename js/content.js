@@ -23,7 +23,7 @@ chrome.runtime.onMessage.addListener(function(request){
       let applicationLink = getApplicationLink()
       let jiraTicket = getTicketFromApplicationName(applicationName)
 
-      
+
       let data = renderRFR({
         developerName: developerName,
         objectsArray: objectsArray,

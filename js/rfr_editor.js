@@ -1,4 +1,4 @@
-var onMessageHandler = function(message){
+let onMessageHandler = function(message){
   // Ensure it is run only once, as we will try to message twice
   chrome.runtime.onMessage.removeListener(onMessageHandler);
 

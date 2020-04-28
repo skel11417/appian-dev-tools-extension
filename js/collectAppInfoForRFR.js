@@ -1,5 +1,9 @@
-// collectAppInfoForRFR
+// helper
 
+// get RuleName
+function getRuleName () {
+  return document.querySelector(".TitleText---page_header").innerText
+}
 
 // getAllObjectsOnPage
 function getAllObjectsOnPage () {
