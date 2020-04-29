@@ -1,8 +1,27 @@
-// helper
+// helperFunctions.js
 
 // get RuleName
 function getRuleName () {
   return document.querySelector(".TitleText---page_header").innerText
+}
+
+// getDeveloperNameWithPrompt
+function getDeveloperNameWithPrompt() {
+  let developerName = ""
+  // Get the developer's name via a prompt
+  developerName = window.prompt(
+    "Enter your name",
+    "No Name"
+  )
+  return developerName
+}
+
+let formatDate = () => {
+  let today = new Date()
+  let dd  = (today.getDate() < 10 ? '0' : '') + today.getDate();
+  let month = ((today.getMonth() + 1) < 10 ? '0' : '') + (today.getMonth() + 1);
+  let yyyy = today.getFullYear()
+  return (yyyy + "-" + month + "-" + dd);
 }
 
 // getAllObjectsOnPage
