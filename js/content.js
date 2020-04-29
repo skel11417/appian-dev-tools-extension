@@ -22,17 +22,21 @@ chrome.runtime.onMessage.addListener(function(request){
       let applicationName = getApplicationName()
       let applicationLink = getApplicationLink()
       let jiraTicket = getTicketFromApplicationName(applicationName)
+      let rfrId = "my_rfr"
+      let rfrData = {
+          applicationLink: applicationLink,
+          jiraTicket: jiraTicket,
+          developerNames: developerName,
+          functionalSolution: "* here's my functional solution",
+          technicalSolution: "* here's my technical solution",
+          testingConsiderations: "sample testing considerations",
+          objectsArray: objectsArray,
+          applicationName: applicationName
+        }
 
-
-      let data = renderRFR({
-        developerName: developerName,
-        objectsArray: objectsArray,
-        applicationName: applicationName,
-        applicationLink: applicationLink,
-        jiraTicket: jiraTicket
+      chrome.storage.local.set({"my_rfr": rfrData}, function() {
+        chrome.runtime.sendMessage({type: 'openRFREditor', rfrId: rfrId})
       })
-
-      chrome.runtime.sendMessage({type: 'openRFREditor', data: data})
     })
   }
 

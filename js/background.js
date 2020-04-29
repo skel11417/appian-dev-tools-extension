@@ -79,13 +79,13 @@ chrome.runtime.onMessage.addListener(function (message){
           var handler = function(tabId, changeInfo) {
             if(tabId === tab.id && changeInfo.status === "complete"){
               chrome.tabs.onUpdated.removeListener(handler);
-              chrome.tabs.sendMessage(tabId, {data: message.data});
+              chrome.tabs.sendMessage(tabId, {rfrId: message.rfrId});
             }
           }
           // in case we're faster than page load (usually):
         chrome.tabs.onUpdated.addListener(handler);
         // just in case we're too late with the listener:
-        chrome.tabs.sendMessage(tab.id, {data: message.data});
+        chrome.tabs.sendMessage(tab.id, {rfrId: message.rfrId});
         }
       );
     }

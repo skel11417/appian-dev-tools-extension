@@ -9,7 +9,7 @@
     <form class="form" >
       <h1>RFR Editor 1.2</h1>
       <div>
-        <h2 id="ticket-name">Ticket Name</h2>
+        <h2 id="jira-ticket">Ticket Name</h2>
         <div>
           <label for="developers">Developers</label>
           <input id="developers" type="text" class="TextInput---text TextInput---align_start" aria-labelledby="4a0861f3fd18c977191cd18020920f7a" aria-describedby="4a0861f3fd18c977191cd18020920f7a-instructions" placeholder="" value="">
@@ -25,6 +25,35 @@
         <div>
           <label for"testing-considerations">Testing Considerations</label>
           <textarea id="testing-considerations" form="form" class="" role="textbox" placeholder="Provide a comprehensive list of what testers should know to completely test this ticket. Be sure to point out any changes not immediately apparent in the ticket description (e.g. wording changes, navigation changes)"></textarea>
+        </div>
+        <br>
+        <br>
+        <div class="section-box">
+          <h3>Deployment Information</h3>
+          <div>
+            <label for="application-name">Application</label>
+            <input id="application-name" disabled type="text" class="" value="">
+          </div>
+        </div>
+        <div class="section-box">
+          <div class="checklist-item">
+            <p>Unit tested</p>
+            <input type="radio" id="unit-tested-true" name="gender" value="true">
+            <label for="unit-tested-true">Yes</label><br>
+            <input type="radio" id="unit-tested-false" name="gender" value="false">
+            <label for="unit-tested-false">No</label><br>
+            <input type="radio" id="unit-tested-null" name="gender" value="null">
+            <label for="unit-tested-null">N/A</label>
+          </div>
+        </div>
+        <div class="section-box">
+          <table id="object-table">
+            <tr id="#table-header">
+              <th>Object Type</th>
+              <th>Object Name</th>
+              <th>Change List</th>
+            </tr>
+          </table>
         </div>
       </div>
       <input type="submit" value="Submit">
