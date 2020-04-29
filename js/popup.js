@@ -2,7 +2,7 @@
 document.addEventListener('DOMContentLoaded', function(){
 
   // Create a new RFR
-  document.querySelector('#btn-create-rfr').addEventListener('click', () => onclick('create'), false)
+  document.querySelector('#btn-create-rfr').addEventListener('click', () => onclick('createNewRFR'), false)
 
   // Load the existing RFR for the app
   // document.querySelector('#btn-load-rfr').addEventListener('click', () => onclick('load'), false)

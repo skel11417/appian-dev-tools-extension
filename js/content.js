@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener(function(request){
 
   // Execute Code to load developer name and Create an RFR
-  if (request === 'create'){
+  if (request === 'createNewRFR'){
     chrome.storage.local.get('developerName', function (result) {
       let developerName
       if (result.developerName){

@@ -6,6 +6,28 @@
     <script src="js/rfr_editor.js"></script>
   </head>
   <body>
-    <h1>RFR Editor 1.2</h1>
+    <form class="form" >
+      <h1>RFR Editor 1.2</h1>
+      <div>
+        <h2 id="ticket-name">Ticket Name</h2>
+        <div>
+          <label for="developers">Developers</label>
+          <input id="developers" type="text" class="TextInput---text TextInput---align_start" aria-labelledby="4a0861f3fd18c977191cd18020920f7a" aria-describedby="4a0861f3fd18c977191cd18020920f7a-instructions" placeholder="" value="">
+        </div>
+        <div>
+          <label for"functional-solution">Functional Solution</label>
+          <textarea id="functional-solution" form="form" role="textbox" placeholder="List out all functional changes as a result of this ticket. In particular, think about the impacts to the end-user. For production fixes, make sure to include the identifiers for specific records impacted."></textarea>
+        </div>
+        <div>
+          <label for"technical-solution">Technical Solution</label>
+          <textarea id="technical-solution" form="form" class="" role="textbox" placeholder="Provide a general overview of what was done to complete this ticket. For production fixes, include names of Tables, fields, ids, etc. that were changed"></textarea>
+        </div>
+        <div>
+          <label for"testing-considerations">Testing Considerations</label>
+          <textarea id="testing-considerations" form="form" class="" role="textbox" placeholder="Provide a comprehensive list of what testers should know to completely test this ticket. Be sure to point out any changes not immediately apparent in the ticket description (e.g. wording changes, navigation changes)"></textarea>
+        </div>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
   </body>
 </html>
