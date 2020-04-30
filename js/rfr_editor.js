@@ -1,7 +1,4 @@
 function insertValuesIntoRFRTemplate (rfrId, rfrData) {
-  // const ticketSummary = document.createElement('h2')
-  // ticketName.innerText = "Ticket Summary"
-  // document.body.appendChild(ticketSummary)
   document.querySelector("#jira-ticket").value = rfrData.jiraTicket
   document.querySelector("#developers").value = rfrData.developerNames
   document.querySelector("#functional-solution").value = rfrData.functionalSolution
@@ -19,6 +16,7 @@ function createObjectTableRow (object) {
   let objectTypeCell = row.insertCell(0);
   let objectNameCell = row.insertCell(1);
   let changeListCell = row.insertCell(2);
+  changeListCell.contentEditable = "true"
   objectTypeCell.innerText = object.objectType;
   // make input
   objectNameCell.innerText = object.objectName;
@@ -37,7 +35,6 @@ let onMessageHandler = function(message){
   chrome.storage.local.get(rfrId, function (result) {
     let rfrData = result[rfrId]
     insertValuesIntoRFRTemplate(rfrId, rfrData)
-
   })
   // document.body.appendChild(textArea)
 }
