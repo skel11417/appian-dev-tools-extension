@@ -111,7 +111,7 @@ function getApplicationLink () {
 
 // renderRFR
 function renderRFR (rfrParameters) {
-  return `{panel:title=Ready For Review:${rfrParameters.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
+  return `{panel:title=Ready For Review: ${rfrParameters.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
 h2.Ticket Summary
 |Developers|${rfrParameters.developerName}
 |
