@@ -123,18 +123,18 @@ h2.Ticket Summary
 |
 |Deployment Information|* Application: [${rfrParameters.applicationName}|${rfrParameters.applicationLink}]
 * Builds Required:
-* Pull Request:
+* Pull Request: None
 * Additional Information:
 |
 
 
 
 h2.Checklist
-|Unit Tested?|()|
+|Unit Tested?|(/)|
 |Test Case Created?|()|
-|Broken Instances Deleted?|()|
-|Reference Data Helper Updated?|()|
-|Data Dictionary Updated?|()|
+|Broken Instances Deleted?|(N/A)|
+|Reference Data Helper Updated?|(N/A)|
+|Data Dictionary Updated?|(N/A)|
 
 
 
