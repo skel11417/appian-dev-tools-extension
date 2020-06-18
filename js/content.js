@@ -29,7 +29,7 @@ chrome.runtime.onMessage.addListener(function(request){
           developerNames: developerName,
           functionalSolution: "* here's my functional solution",
           technicalSolution: "* here's my technical solution",
-          testingConsiderations: "sample testing considerations",
+          testingConsiderations: "* sample testing considerations",
           objectsArray: objectsArray,
           applicationName: applicationName
         }
@@ -43,8 +43,6 @@ chrome.runtime.onMessage.addListener(function(request){
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {
-      // alert('Value currently is ' + result.test_1);
-      // let data = {"foo": "bar", "bananas": "pijamas"}
       let data = result.test_1
       chrome.runtime.sendMessage({type: 'open', data: data})
     });

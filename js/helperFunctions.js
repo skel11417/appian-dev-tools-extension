@@ -82,11 +82,11 @@ function sortObjects (objectsArray) {
   return [...objectsArray].sort(compareObjectTypes)
 }
 
-// renderObjects
+// renderObjectsArray
 function renderObjectsArray (objectsArray) {
   let outputString = ""
   const sortedArray = sortObjects(objectsArray)
-  const formattedRows = sortedArray.map(object => `|${object.objectType}|${object.objectName}|* Created|`)
+  const formattedRows = sortedArray.map(object => `|${object.objectType}|${object.objectName}|${object.changeList}|`)
   formattedRows.forEach(row => {outputString += row + "\n"})
   return outputString
 }
@@ -100,7 +100,6 @@ function getApplicationName () {
 function getTicketFromApplicationName (applicationName) {
   let ticketNameRegex = /([A-Z]+)\s.+-(\d+)/
   let matches = applicationName.match(ticketNameRegex)
-
   return matches[1] + "-" + matches[2]
 }
 
@@ -110,18 +109,18 @@ function getApplicationLink () {
 }
 
 // renderRFR
-function renderRFR (rfrParameters) {
-  return `{panel:title=Ready For Review:${rfrParameters.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
+function renderRFR (rfrData) {
+  return `{panel:title=Ready For Review: ${rfrData.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
 h2.Ticket Summary
-|Developers|${rfrParameters.developerName}
+|Developers|${rfrData.developerNames}
 |
-|Functional Solution|
+|Functional Solution|${rfrData.functionalSolution}
 |
-|Technical Solution|
+|Technical Solution|${rfrData.technicalSolution}
 |
-|Testing Considerations|
+|Testing Considerations|${rfrData.testingConsiderations}
 |
-|Deployment Information|* Application: [${rfrParameters.applicationName}|${rfrParameters.applicationLink}]
+|Deployment Information|* Application: [${rfrData.applicationName}|${rfrData.applicationLink}]
 * Builds Required:
 * Pull Request:
 * Additional Information:
@@ -140,5 +139,5 @@ h2.Checklist
 
 h2.Change Log
 ||Object Type||Object Name||Change List||
-${renderObjectsArray(rfrParameters.objectsArray)}{panel}`
+${renderObjectsArray(rfrData.objectsArray)}{panel}`
 }

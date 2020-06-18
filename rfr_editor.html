@@ -4,15 +4,16 @@
     <meta charset="utf-8">
     <title>RFR Editor</title>
     <script src="js/rfr_editor.js"></script>
+    <script src="js/helperFunctions.js"></script>
   </head>
   <body>
-    <form class="form" >
+    <form id="form" class="form" >
       <h1>RFR Editor 1.2</h1>
-      <div>
+      <div id="rfr-editor">
         <h2 id="jira-ticket">Ticket Name</h2>
         <div>
-          <label for="developers">Developers</label>
-          <input id="developers" type="text" class="TextInput---text TextInput---align_start" aria-labelledby="4a0861f3fd18c977191cd18020920f7a" aria-describedby="4a0861f3fd18c977191cd18020920f7a-instructions" placeholder="" value="">
+          <label for="developer-names">Developers</label>
+          <input id="developer-names" type="text" class="TextInput---text TextInput---align_start" aria-labelledby="4a0861f3fd18c977191cd18020920f7a" aria-describedby="4a0861f3fd18c977191cd18020920f7a-instructions" placeholder="" value="">
         </div>
         <div>
           <label for"functional-solution">Functional Solution</label>
@@ -37,12 +38,21 @@
         </div>
         <div class="section-box">
           <div class="checklist-item">
-            <p>Unit tested</p>
-            <input type="radio" id="unit-tested-true" name="gender" value="true">
+            <p>Unit Tested?</p>
+            <input type="radio" id="unit-tested-true" name="unit-tested" value="true">
             <label for="unit-tested-true">Yes</label><br>
-            <input type="radio" id="unit-tested-false" name="gender" value="false">
+            <input type="radio" id="unit-tested-false" name="unit-tested" value="false">
             <label for="unit-tested-false">No</label><br>
-            <input type="radio" id="unit-tested-null" name="gender" value="null">
+            <input type="radio" id="unit-tested-null" name="unit-tested" value="null">
+            <label for="unit-tested-null">N/A</label>
+          </div>
+          <div class="checklist-item">
+            <p>Test Case Created?</p>
+            <input type="radio" id="test-case-true" name="test-case" value="true">
+            <label for="test-case-true">Yes</label><br>
+            <input type="radio" id="test-case-false" name="test-case" value="false">
+            <label for="test-case-false">No</label><br>
+            <input type="radio" id="test-case-null" name="test-case" value="null">
             <label for="unit-tested-null">N/A</label>
           </div>
         </div>
@@ -56,7 +66,7 @@
           </table>
         </div>
       </div>
-      <input type="submit" value="Submit">
+      <input id="submit" type="submit" value="Submit">
     </form>
   </body>
 </html>
