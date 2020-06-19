@@ -27,6 +27,18 @@
           <label for"testing-considerations">Testing Considerations</label>
           <textarea id="testing-considerations" form="form" class="" role="textbox" placeholder="Provide a comprehensive list of what testers should know to completely test this ticket. Be sure to point out any changes not immediately apparent in the ticket description (e.g. wording changes, navigation changes)"></textarea>
         </div>
+        <div>
+          <label for="builds-required">Builds Required</label>
+          <input id="builds-required" type="text" class="" placeholder="" value="">
+        </div>
+        <div>
+          <label for="pull-request">Pull Request</label>
+          <input id="pull-request" type="text" class="" placeholder="" value="">
+        </div>
+        <div>
+          <label for"additional-information">Additional Information</label>
+          <textarea id="additional-information" form="form" class="" role="textbox" placeholder=""></textarea>
+        </div>
         <br>
         <br>
         <div class="section-box">
@@ -54,6 +66,33 @@
             <label for="test-case-false">No</label><br>
             <input type="radio" id="test-case-null" name="test-case" value="null">
             <label for="unit-tested-null">N/A</label>
+          </div>
+          <div class="checklist-item">
+            <p>Broken Instances Deleted?</p>
+            <input type="radio" id="broken-instances-true" name="broken-instances" value="true">
+            <label for="broken-instances-true">Yes</label><br>
+            <input type="radio" id="broken-instances-false" name="broken-instances" value="false">
+            <label for="broken-instances-false">No</label><br>
+            <input type="radio" id="broken-instances-null" name="broken-instances" value="null">
+            <label for="broken-instances-null">N/A</label>
+          </div>
+          <div class="checklist-item">
+            <p>Reference Data Helper Updated?</p>
+            <input type="radio" id="reference-data-true" name="reference-data" value="true">
+            <label for="reference-data-true">Yes</label><br>
+            <input type="radio" id="reference-data-false" name="reference-data" value="false">
+            <label for="reference-data-false">No</label><br>
+            <input type="radio" id="reference-data-null" name="reference-data" value="null">
+            <label for="reference-data-null">N/A</label>
+          </div>
+          <div class="checklist-item">
+            <p>Data Dictionary Updated?</p>
+            <input type="radio" id="data-dictionary-true" name="data-dictionary" value="true">
+            <label for="data-dictionary-true">Yes</label><br>
+            <input type="radio" id="data-dictionary-false" name="data-dictionary" value="false">
+            <label for="data-dictionary-false">No</label><br>
+            <input type="radio" id="data-dictionary-null" name="data-dictionary" value="null">
+            <label for="data-dictionary-null">N/A</label>
           </div>
         </div>
         <div class="section-box">

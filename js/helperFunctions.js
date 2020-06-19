@@ -108,6 +108,20 @@ function getApplicationLink () {
   return window.location.href
 }
 
+// formatRadioValue
+function formatRadioValue (radioValue) {
+  switch (radioValue) {
+    case "true":
+      return "(/)"
+    case "false":
+      return "(x)"
+    case "null":
+      return "(N/A)"
+    default:
+      return "(N/A)"
+  }
+}
+
 // renderRFR
 function renderRFR (rfrData) {
   return `{panel:title=Ready For Review: ${rfrData.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
@@ -121,19 +135,19 @@ h2.Ticket Summary
 |Testing Considerations|${rfrData.testingConsiderations}
 |
 |Deployment Information|* Application: [${rfrData.applicationName}|${rfrData.applicationLink}]
-* Builds Required:
-* Pull Request:
-* Additional Information:
+* Builds Required: ${rfrData.buildsRequired}
+* Pull Request: ${rfrData.pullRequest}
+* Additional Information: ${rfrData.additionalInformation}
 |
 
 
 
 h2.Checklist
-|Unit Tested?|()|
-|Test Case Created?|()|
-|Broken Instances Deleted?|()|
-|Reference Data Helper Updated?|()|
-|Data Dictionary Updated?|()|
+|Unit Tested?|${formatRadioValue(rfrData.isUnitTested)}|
+|Test Case Created?|${formatRadioValue(rfrData.isTestCaseCreated)}|
+|Broken Instances Deleted?|${formatRadioValue(rfrData.isBrokenInstancesDeleted)}|
+|Reference Data Helper Updated?|${formatRadioValue(rfrData.isReferenceDataHelperUpdated)}|
+|Data Dictionary Updated?|${formatRadioValue(rfrData.isDataDictionaryUpdated)}|
 
 
 

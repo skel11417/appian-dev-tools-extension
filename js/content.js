@@ -24,14 +24,26 @@ chrome.runtime.onMessage.addListener(function(request){
       let jiraTicket = getTicketFromApplicationName(applicationName)
       let rfrId = "my_rfr"
       let rfrData = {
+          rfrId: rfrId,
           applicationLink: applicationLink,
           jiraTicket: jiraTicket,
           developerNames: developerName,
-          functionalSolution: "* here's my functional solution",
-          technicalSolution: "* here's my technical solution",
-          testingConsiderations: "* sample testing considerations",
-          objectsArray: objectsArray,
-          applicationName: applicationName
+          functionalSolution: "",
+          technicalSolution: "",
+          testingConsiderations: "",
+          // Deployment Information
+          applicationName: applicationName,
+          buildsRequired: "",
+          pullRequest: "",
+          additionalInformation: "",
+          // Radio button values
+          isUnitTested: "null",
+          isTestCaseCreated: "null",
+          isBrokenInstancesDeleted: "null",
+          isReferenceDataHelperUpdated: "null",
+          isDataDictionaryUpdated: "null",
+          // Objects Array
+          objectsArray: objectsArray
         }
 
       chrome.storage.local.set({"my_rfr": rfrData}, function() {

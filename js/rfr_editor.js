@@ -2,32 +2,115 @@
 
 // insertValuesIntoRFRTemplate
 function insertValuesIntoRFRTemplate (rfrId, rfrData) {
+  // hiddenFields
+
+
   document.querySelector("#jira-ticket").value = rfrData.jiraTicket
   document.querySelector("#developer-names").value = rfrData.developerNames
   document.querySelector("#functional-solution").value = rfrData.functionalSolution
   document.querySelector("#technical-solution").value = rfrData.technicalSolution
   document.querySelector("#testing-considerations").value = rfrData.testingConsiderations
   document.querySelector("#application-name").value = rfrData.applicationName
+  document.querySelector("#builds-required").value = rfrData.buildsRequired
+  document.querySelector("#pull-request").value = rfrData.pullRequest
+  document.querySelector("#additional-information").value = rfrData.additionalInformation
 
+  // Radio button values
+  // Unit Tested?
+  setRadioValue('unit-tested', rfrData.isUnitTested),
+  // Test Case Created?
+  setRadioValue('test-case', rfrData.isTestCaseCreated),
+  // Broken Instances Deleted?
+  setRadioValue('broken-instances', rfrData.isBrokenInstancesDeleted),
+  // Reference Data Helper Updated
+  setRadioValue('reference-data', rfrData.isReferenceDataHelperUpdated),
+  // Data Dictionary Updated
+  setRadioValue('data-dictionary', rfrData.isDataDictionaryUpdated),
+
+  // Objects Array
   rfrData.objectsArray.forEach(object => createObjectTableRow(object))
 }
 
 // getValuesFromRFRTemplate
 function getValuesFromRFRTemplate () {
   let rfrData = {
+    // Hidden Fields
     // applicationLink: create a hidden field for this
+    // rfrId: create a hidden field for this
+
+    // Text Fields
     jiraTicket: document.querySelector("#jira-ticket").value,
     developerNames: document.querySelector("#developer-names").value,
     functionalSolution: document.querySelector("#functional-solution").value,
     technicalSolution: document.querySelector("#technical-solution").value,
     testingConsiderations: document.querySelector("#testing-considerations").value,
-    // objectsArray: create a rule to create a new array from the table data,
-    // this is just dummy data
-    objectsArray: [{objectType: "objectType", objectName: "objectName", objectLink: "objectLink", changeList: "* Whatever changes the user added"}],
 
-    applicationName: document.querySelector("#application-name").value
+    // Deployment Information
+    applicationName: document.querySelector("#application-name").value,
+    buildsRequired: document.querySelector("#builds-required").value,
+    pullRequest: document.querySelector("#pull-request").value,
+    additionalInformation: document.querySelector("#additional-information").value,
+    // Radio button values
+    isUnitTested: getRadioValue('unit-tested'),
+    isTestCaseCreated: getRadioValue('test-case'),
+    isBrokenInstancesDeleted: getRadioValue('broken-instances'),
+    isReferenceDataHelperUpdated: getRadioValue('reference-data'),
+    isDataDictionaryUpdated: getRadioValue('data-dictionary'),
+    objectsArray: getObjectsArrayFromTable()
   }
   return rfrData
+}
+
+// getRadioValue
+function getRadioValue (radioName) {
+  let radioValue
+  let radioNodes = document.getElementById('form').elements[radioName]
+  for (var i=0, len=radioNodes.length; i<len; i++) {
+    if ( radioNodes[i].checked ) {
+        radioValue = radioNodes[i].value
+        break
+    }
+  }
+  return radioValue
+}
+
+// setRadioValue
+function setRadioValue (radioName, radioValue) {
+  let radioNodes = document.getElementById('form').elements[radioName]
+
+  for (var i=0, len=radioNodes.length; i<len; i++) {
+    if ( radioNodes[i].value === radioValue ) {
+      if (Boolean(radioValue)) {
+        radioNodes[i].checked = true
+      } else {
+        radioNodes[i].checked = false
+      }
+      break
+    }
+  }
+}
+
+// getObjectsArrayFromTable
+function getObjectsArrayFromTable () {
+  let objectsArray = []
+  let objectRows = document.querySelectorAll('.object-row')
+
+  if (objectRows) {
+    objectRows.forEach(objectRow => {
+      objectsArray.push(
+        {
+          objectType: objectRow.children[0].innerText,
+          objectName: objectRow.children[1].innerText,
+          // objectLink: "objectLink",
+
+          // Add a rule to parse this text field
+          changeList: objectRow.children[2].innerText
+        }
+      )
+    })
+
+  }
+  return objectsArray
 }
 
 // createObjectTableRow
@@ -35,6 +118,7 @@ function createObjectTableRow (object) {
   // {objectType: objectType, objectName: objectName, objectLink: objectLink, changeList: ""}
   let table = document.getElementById("object-table");
   let row = table.insertRow(-1);
+  row.classList.add("object-row");
   let objectTypeCell = row.insertCell(0);
   let objectNameCell = row.insertCell(1);
   let changeListCell = row.insertCell(2);
@@ -61,8 +145,9 @@ function onGenerateMarkdown (event) {
     markdownTextArea.label = "ChangeLog"
     markdownTextArea.style = "margin: 0px; width: 580px; height: 303px;"
     markdownTextArea.value = renderRFR(rfrData)
-    // Clear Template editor
-    document.querySelector("#rfr-editor").innerHTML = ""
+    // Clear Template editor and button
+    document.querySelector("#rfr-editor").remove()
+    document.querySelector("#submit").remove()
     // Add Markdown Text Area to document
     document.body.appendChild(markdownTextArea)
   }
