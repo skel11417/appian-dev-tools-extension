@@ -3,9 +3,11 @@
 // insertValuesIntoRFRTemplate
 function insertValuesIntoRFRTemplate (rfrId, rfrData) {
   // hiddenFields
+  document.querySelector("#rfr-id").value = rfrId
+  document.querySelector("#application-link").value = rfrData.applicationLink
 
-
-  document.querySelector("#jira-ticket").value = rfrData.jiraTicket
+  // Visible Fields
+  document.querySelector("#jira-ticket").innerText = rfrData.jiraTicket
   document.querySelector("#developer-names").value = rfrData.developerNames
   document.querySelector("#functional-solution").value = rfrData.functionalSolution
   document.querySelector("#technical-solution").value = rfrData.technicalSolution
@@ -34,12 +36,12 @@ function insertValuesIntoRFRTemplate (rfrId, rfrData) {
 // getValuesFromRFRTemplate
 function getValuesFromRFRTemplate () {
   let rfrData = {
-    // Hidden Fields
-    // applicationLink: create a hidden field for this
-    // rfrId: create a hidden field for this
+    // Hidden Field
+    applicationLink: document.querySelector("#application-link").value,
+      // rfrId: create a separate for this
 
     // Text Fields
-    jiraTicket: document.querySelector("#jira-ticket").value,
+    jiraTicket: document.querySelector("#jira-ticket").innerText,
     developerNames: document.querySelector("#developer-names").value,
     functionalSolution: document.querySelector("#functional-solution").value,
     technicalSolution: document.querySelector("#technical-solution").value,
