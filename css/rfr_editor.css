@@ -6,6 +6,22 @@
   margin-top: 6px;
 }
 
+table, th, td {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 5px;
+}
+
+tr:nth-child(even) {
+  background: #FFE5
+}
+tr:nth-child(odd) {
+  background: #FFF
+}
+
 .checklist-item {
   display: flex;
 }
@@ -15,14 +31,14 @@
   width: 75%;
   margin-top: 6px;
 }
+
 .container {
   border-radius: 5px;
   background-color: #f2f2f2;
   padding: 20px;
-  width: 50%;
+  width: 900px;
 }
 
 textarea {
   width: 100%;
-  height: 93px;
 }

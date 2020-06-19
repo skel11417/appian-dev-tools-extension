@@ -19,18 +19,20 @@ function insertValuesIntoRFRTemplate (rfrId, rfrData) {
 
   // Radio button values
   // Unit Tested?
-  setRadioValue('unit-tested', rfrData.isUnitTested),
+  setRadioValue('unit-tested', rfrData.isUnitTested)
   // Test Case Created?
-  setRadioValue('test-case', rfrData.isTestCaseCreated),
+  setRadioValue('test-case', rfrData.isTestCaseCreated)
   // Broken Instances Deleted?
-  setRadioValue('broken-instances', rfrData.isBrokenInstancesDeleted),
+  setRadioValue('broken-instances', rfrData.isBrokenInstancesDeleted)
   // Reference Data Helper Updated
-  setRadioValue('reference-data', rfrData.isReferenceDataHelperUpdated),
+  setRadioValue('reference-data', rfrData.isReferenceDataHelperUpdated)
   // Data Dictionary Updated
-  setRadioValue('data-dictionary', rfrData.isDataDictionaryUpdated),
+  setRadioValue('data-dictionary', rfrData.isDataDictionaryUpdated)
 
-  // Objects Array
-  rfrData.objectsArray.forEach(object => createObjectTableRow(object))
+  // Sort Objects Array
+  sortedObjectsArray = sortObjects(rfrData.objectsArray)
+  sortedObjectsArray.forEach(object => createObjectTableRow(object))
+
 }
 
 // getValuesFromRFRTemplate
