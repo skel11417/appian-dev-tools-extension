@@ -134,6 +134,16 @@ function createObjectTableRow (object) {
   changeListCell.innerText = object.changeList;
 }
 
+// copyToClipboard
+function copyToClipboard(event) {
+  event.preventDefault()
+  console.log("it worked")
+  let textToCopy = document.querySelector('#markdown-text-area')
+  textToCopy.select();
+  document.execCommand("copy");
+  alert("Copied to clipboard");
+}
+
 // onGenerateMarkdown
 function onGenerateMarkdown (event) {
     event.preventDefault()
@@ -146,15 +156,27 @@ function onGenerateMarkdown (event) {
 
     // Create text area for the RFR
     let markdownTextArea = document.createElement("textarea");
-    markdownTextArea.label = "ChangeLog"
-    markdownTextArea.style = "margin: 0px; width: 580px; height: 303px;"
-    markdownTextArea.value = renderRFR(rfrData)
+    markdownTextArea.label = "ChangeLog";
+    markdownTextArea.style = "margin: 0px; width: 580px; height: 303px;";
+    markdownTextArea.id = "markdown-text-area";
+    markdownTextArea.value = renderRFR(rfrData);
+
+    // Create button
+    let copyToClipboardButton = document.createElement("button");
+    copyToClipboardButton.id = "copy-to-clipboard"
+    copyToClipboardButton.innerHTML = "Copy to Clipboard";
+    copyToClipboardButton.addEventListener("click", copyToClipboard)
+
     // Clear Template editor and button
     document.querySelector("#rfr-editor").remove()
     document.querySelector("#submit").remove()
     // Add Markdown Text Area to document
-    document.body.appendChild(markdownTextArea)
+    let container = document.querySelector('.container')
+    container.appendChild(markdownTextArea)
+    container.appendChild(copyToClipboardButton)
   }
+
+
 
 // onMessageHandler
 function onMessageHandler (message) {

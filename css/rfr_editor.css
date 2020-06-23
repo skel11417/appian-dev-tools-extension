@@ -19,6 +19,14 @@ table {
   width: 100%
 }
 
+.button {
+  margin: 10px 0px;
+}
+
+#copy-to-clipboard {
+  margin: 0px 10px;
+}
+
 tr:nth-child(even) {
   background: #FFE5
 }
