@@ -137,7 +137,6 @@ function createObjectTableRow (object) {
 // copyToClipboard
 function copyToClipboard(event) {
   event.preventDefault()
-  console.log("it worked")
   let textToCopy = document.querySelector('#markdown-text-area')
   textToCopy.select();
   document.execCommand("copy");
