@@ -14,6 +14,9 @@ A chrome extension for Appian developers at TSPi
 
 ### Changelog
 
+#### Version 2.0
+* **Brand New RFR Editor** Clicking *Create RFR* in the Development Tool now takes the user to a form where information can be entered for each field of the RFR Template. The template is prepopulated with the same data as in previous versions.
+
 #### Version 1.2
 * **Full RFR Template Generation** Clicking *Create RFR* in the Development Tool popup while in an Appian application now generates a full RFR template including:
   * The Application Name (with a formatted link to the application)
