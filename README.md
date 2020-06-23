@@ -14,6 +14,9 @@ A chrome extension for Appian developers at TSPi
 
 ### Changelog
 
+#### Version 2.0
+* **Brand New RFR Editor** Clicking *Create RFR* in the Development Tool now takes the user to a form where information can be entered for each field of the RFR Template. The template is prepopulated with the same data as in previous versions.
+
 #### Version 1.3
 * **Insert A Debug Box Into Your Interface** Right click in an interface and click *Insert Debug Box Component*. The extension will scan the SAIL code for all local variables and rule inputs and insert the code for a debug box into the interface. Be aware that if your SAIL only consists of one component, you will need to add {} around it to create a list of components.
 

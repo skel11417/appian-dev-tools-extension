@@ -3,9 +3,117 @@
   <head>
     <meta charset="utf-8">
     <title>RFR Editor</title>
+    <link rel="stylesheet" href="css/rfr_editor.css">
     <script src="js/rfr_editor.js"></script>
+    <script src="js/helperFunctions.js"></script>
   </head>
   <body>
-    <h1>RFR Editor 1.2</h1>
+    <form id="form" class="form" >
+      <div class="container">
+        <input type="hidden" id="rfr-id" name="rfr-id">
+        <input type="hidden" id="application-link" name="application-link">
+        <h1>RFR Editor 2.0</h1>
+        <div id="rfr-editor">
+          <h2 id="jira-ticket">Ticket Name</h2>
+          <div class="row">
+            <div class="col-25">
+              <label for="developer-names">Developers</label>
+            </div>
+            <div class="col-75">
+              <input id="developer-names" type="text" class="TextInput---text TextInput---align_start" aria-labelledby="4a0861f3fd18c977191cd18020920f7a" aria-describedby="4a0861f3fd18c977191cd18020920f7a-instructions" placeholder="" value="">
+            </div>
+          </div>
+          <div class="row">
+            <label for"functional-solution">Functional Solution</label>
+            <textarea id="functional-solution" form="form" role="textbox" placeholder="List out all functional changes as a result of this ticket. In particular, think about the impacts to the end-user. For production fixes, make sure to include the identifiers for specific records impacted."></textarea>
+          </div>
+          <div class="row">
+            <label for"technical-solution">Technical Solution</label>
+            <textarea id="technical-solution" form="form" class="" role="textbox" placeholder="Provide a general overview of what was done to complete this ticket. For production fixes, include names of Tables, fields, ids, etc. that were changed"></textarea>
+          </div>
+          <div class="row">
+            <label for"testing-considerations">Testing Considerations</label>
+            <textarea id="testing-considerations" form="form" class="" role="textbox" placeholder="Provide a comprehensive list of what testers should know to completely test this ticket. Be sure to point out any changes not immediately apparent in the ticket description (e.g. wording changes, navigation changes)"></textarea>
+          </div>
+          <div class="row">
+            <label for="builds-required">Builds Required</label>
+            <input id="builds-required" type="text" class="" placeholder="" value="">
+          </div>
+          <div class="row">
+            <label for="pull-request">Pull Request</label>
+            <input id="pull-request" type="text" class="" placeholder="" value="">
+          </div>
+          <div class="row">
+            <label for"additional-information">Additional Information</label>
+            <textarea id="additional-information" form="form" class="" role="textbox" placeholder=""></textarea>
+          </div>
+          <br>
+          <div class="section-box">
+            <h3>Deployment Information</h3>
+            <div>
+              <label for="application-name">Application</label>
+              <input id="application-name" disabled type="text" class="" value="">
+            </div>
+          </div>
+          <div class="section-box">
+            <div class="checklist-item">
+              <p>Unit Tested?</p>
+              <input type="radio" id="unit-tested-true" name="unit-tested" value="true">
+              <label for="unit-tested-true">Yes</label><br>
+              <input type="radio" id="unit-tested-false" name="unit-tested" value="false">
+              <label for="unit-tested-false">No</label><br>
+              <input type="radio" id="unit-tested-null" name="unit-tested" value="null">
+              <label for="unit-tested-null">N/A</label>
+            </div>
+            <div class="checklist-item">
+              <p>Test Case Created?</p>
+              <input type="radio" id="test-case-true" name="test-case" value="true">
+              <label for="test-case-true">Yes</label><br>
+              <input type="radio" id="test-case-false" name="test-case" value="false">
+              <label for="test-case-false">No</label><br>
+              <input type="radio" id="test-case-null" name="test-case" value="null">
+              <label for="unit-tested-null">N/A</label>
+            </div>
+            <div class="checklist-item">
+              <p>Broken Instances Deleted?</p>
+              <input type="radio" id="broken-instances-true" name="broken-instances" value="true">
+              <label for="broken-instances-true">Yes</label><br>
+              <input type="radio" id="broken-instances-false" name="broken-instances" value="false">
+              <label for="broken-instances-false">No</label><br>
+              <input type="radio" id="broken-instances-null" name="broken-instances" value="null">
+              <label for="broken-instances-null">N/A</label>
+            </div>
+            <div class="checklist-item">
+              <p>Reference Data Helper Updated?</p>
+              <input type="radio" id="reference-data-true" name="reference-data" value="true">
+              <label for="reference-data-true">Yes</label><br>
+              <input type="radio" id="reference-data-false" name="reference-data" value="false">
+              <label for="reference-data-false">No</label><br>
+              <input type="radio" id="reference-data-null" name="reference-data" value="null">
+              <label for="reference-data-null">N/A</label>
+            </div>
+            <div class="checklist-item">
+              <p>Data Dictionary Updated?</p>
+              <input type="radio" id="data-dictionary-true" name="data-dictionary" value="true">
+              <label for="data-dictionary-true">Yes</label><br>
+              <input type="radio" id="data-dictionary-false" name="data-dictionary" value="false">
+              <label for="data-dictionary-false">No</label><br>
+              <input type="radio" id="data-dictionary-null" name="data-dictionary" value="null">
+              <label for="data-dictionary-null">N/A</label>
+            </div>
+          </div>
+          <div class="section-box">
+            <table id="object-table">
+              <tr id="#table-header">
+                <th class="object-type-col">Object Type</th>
+                <th class="object-name-col">Object Name</th>
+                <th class="object-list-col">Change List</th>
+              </tr>
+            </table>
+          </div>
+        </div>
+        <input id="submit" type="submit" value="Generate Markdown" class="button">
+      </div>
+    </form>
   </body>
 </html>

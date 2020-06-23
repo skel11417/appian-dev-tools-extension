@@ -82,11 +82,11 @@ function sortObjects (objectsArray) {
   return [...objectsArray].sort(compareObjectTypes)
 }
 
-// renderObjects
+// renderObjectsArray
 function renderObjectsArray (objectsArray) {
   let outputString = ""
   const sortedArray = sortObjects(objectsArray)
-  const formattedRows = sortedArray.map(object => `|${object.objectType}|${object.objectName}|* Created|`)
+  const formattedRows = sortedArray.map(object => `|${object.objectType}|${object.objectName}|${object.changeList}|`)
   formattedRows.forEach(row => {outputString += row + "\n"})
   return outputString
 }
@@ -100,7 +100,6 @@ function getApplicationName () {
 function getTicketFromApplicationName (applicationName) {
   let ticketNameRegex = /([A-Z]+)\s.+-(\d+)/
   let matches = applicationName.match(ticketNameRegex)
-
   return matches[1] + "-" + matches[2]
 }
 
@@ -109,36 +108,50 @@ function getApplicationLink () {
   return window.location.href
 }
 
+// formatRadioValue
+function formatRadioValue (radioValue) {
+  switch (radioValue) {
+    case "true":
+      return "(/)"
+    case "false":
+      return "(x)"
+    case "null":
+      return "(N/A)"
+    default:
+      return "(N/A)"
+  }
+}
+
 // renderRFR
-function renderRFR (rfrParameters) {
-  return `{panel:title=Ready For Review: ${rfrParameters.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
+function renderRFR (rfrData) {
+  return `{panel:title=Ready For Review: ${rfrData.jiraTicket}|borderStyle=dashed|borderColor=#15466e|titleBGColor=#159999|bgColor=#f8f8f8|titleColor=#ffffff}
 h2.Ticket Summary
-|Developers|${rfrParameters.developerName}
+|Developers|${rfrData.developerNames}
 |
-|Functional Solution|
+|Functional Solution|${rfrData.functionalSolution}
 |
-|Technical Solution|
+|Technical Solution|${rfrData.technicalSolution}
 |
-|Testing Considerations|
+|Testing Considerations|${rfrData.testingConsiderations}
 |
-|Deployment Information|* Application: [${rfrParameters.applicationName}|${rfrParameters.applicationLink}]
-* Builds Required:
-* Pull Request: None
-* Additional Information:
+|Deployment Information|* Application: [${rfrData.applicationName}|${rfrData.applicationLink}]
+* Builds Required: ${rfrData.buildsRequired}
+* Pull Request: ${rfrData.pullRequest}
+* Additional Information: ${rfrData.additionalInformation}
 |
 
 
 
 h2.Checklist
-|Unit Tested?|(/)|
-|Test Case Created?|()|
-|Broken Instances Deleted?|(N/A)|
-|Reference Data Helper Updated?|(N/A)|
-|Data Dictionary Updated?|(N/A)|
+|Unit Tested?|${formatRadioValue(rfrData.isUnitTested)}|
+|Test Case Created?|${formatRadioValue(rfrData.isTestCaseCreated)}|
+|Broken Instances Deleted?|${formatRadioValue(rfrData.isBrokenInstancesDeleted)}|
+|Reference Data Helper Updated?|${formatRadioValue(rfrData.isReferenceDataHelperUpdated)}|
+|Data Dictionary Updated?|${formatRadioValue(rfrData.isDataDictionaryUpdated)}|
 
 
 
 h2.Change Log
 ||Object Type||Object Name||Change List||
-${renderObjectsArray(rfrParameters.objectsArray)}{panel}`
+${renderObjectsArray(rfrData.objectsArray)}{panel}`
 }

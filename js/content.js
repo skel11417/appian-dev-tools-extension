@@ -1,7 +1,7 @@
 chrome.runtime.onMessage.addListener(function(request){
 
   // Execute Code to load developer name and Create an RFR
-  if (request === 'create'){
+  if (request === 'createNewRFR'){
     chrome.storage.local.get('developerName', function (result) {
       let developerName
       if (result.developerName){
@@ -22,25 +22,38 @@ chrome.runtime.onMessage.addListener(function(request){
       let applicationName = getApplicationName()
       let applicationLink = getApplicationLink()
       let jiraTicket = getTicketFromApplicationName(applicationName)
+      let rfrId = "my_rfr"
+      let rfrData = {
+          applicationLink: applicationLink,
+          jiraTicket: jiraTicket,
+          developerNames: developerName,
+          functionalSolution: "",
+          technicalSolution: "",
+          testingConsiderations: "",
+          // Deployment Information
+          applicationName: applicationName,
+          buildsRequired: "",
+          pullRequest: "",
+          additionalInformation: "",
+          // Radio button values
+          isUnitTested: "null",
+          isTestCaseCreated: "null",
+          isBrokenInstancesDeleted: "null",
+          isReferenceDataHelperUpdated: "null",
+          isDataDictionaryUpdated: "null",
+          // Objects Array
+          objectsArray: objectsArray
+        }
 
-
-      let data = renderRFR({
-        developerName: developerName,
-        objectsArray: objectsArray,
-        applicationName: applicationName,
-        applicationLink: applicationLink,
-        jiraTicket: jiraTicket
+      chrome.storage.local.set({"my_rfr": rfrData}, function() {
+        chrome.runtime.sendMessage({type: 'openRFREditor', rfrId: rfrId})
       })
-
-      chrome.runtime.sendMessage({type: 'openRFREditor', data: data})
     })
   }
 
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {
-      // alert('Value currently is ' + result.test_1);
-      // let data = {"foo": "bar", "bananas": "pijamas"}
       let data = result.test_1
       chrome.runtime.sendMessage({type: 'open', data: data})
     });

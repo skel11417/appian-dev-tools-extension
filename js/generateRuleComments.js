@@ -43,7 +43,7 @@ chrome.storage.local.get('developerName', function (result) {
 ////////////////////////////// CHANGE LOG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 <${date}><${ticket}><${developerName}>
-  --Created
+  -- Created
 
 */
 `
