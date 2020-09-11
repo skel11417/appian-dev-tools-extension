@@ -30,6 +30,21 @@ contextMenus.generateRuleComments =
       }
     )
 
+    // Insert Debug Text Field Component
+    contextMenus.insertDebugTextField =
+      chrome.contextMenus.create(
+        {
+          "title": "Insert Debug Text Field Component",
+          "contexts": ["editable","page"],
+          "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+        },
+        function(){
+          if(chrome.runtime.lastError){
+            console.log(chrome.runtime.lastError.message)
+          }
+        }
+      )
+
     // Insert Debug Box Component
     contextMenus.insertDebugBoxComponent =
       chrome.contextMenus.create(
@@ -56,6 +71,11 @@ function contextMenuHandler(info, tab){
     case contextMenus.generateChangeLogEntry:
       chrome.tabs.executeScript({
         file: 'js/generateChangeLogEntry.js'
+      })
+      break;
+    case contextMenus.insertDebugTextField:
+      chrome.tabs.executeScript({
+        file: 'js/insertDebugTextField.js'
       })
       break;
     case contextMenus.insertDebugBoxComponent:

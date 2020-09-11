@@ -1,5 +1,10 @@
 // insertDebugBoxComponent.js
 
+// get RuleName
+function getRuleName () {
+  return document.querySelector(".TitleText---page_header").innerText
+}
+
 function getDistinctVariableNames () {
   let variableNodeList = document.querySelectorAll(".cm-variable")
   // May need to include if statement here if one instance of variable span does
