@@ -14,6 +14,16 @@ A chrome extension for Appian developers at TSPi
 
 ### Changelog
 
+#### Version 3.0
+* **New Look** The extension interface has been updated
+* **New Constant Tools** There are new documentation generation tools available for Constants
+  * Document Constant - Writes the constant's value and adds a changelog to the description field of a constant. The first changelog entry will include the current date, developer, and application. Can be used with new or existing constants.
+  * Add Changelog Entry - Adds a new changelog entry to the top of the changelog with the current date, developer, and application. *Note that the user will still have to enter the previous version.*
+* **Removed Create Debug Box Command** As of Appian 20.2, local variables can now be easily seen in the Appian interface designer, making this tool obsolete.
+
+#### Version 2.1
+* **Insert A Debug Text Field into an Interface** Right click in the expression editor of an interface and click *Insert Debug Text Field Component*. This will insert a new read-only textField component into the interface at your cursor. Perfect for quick debugging.
+
 #### Version 2.0
 * **Brand New RFR Editor** Clicking *Create RFR* in the Development Tool now takes the user to a form where information can be entered for each field of the RFR Template. The template is prepopulated with the same data as in previous versions.
 
