@@ -1,14 +1,29 @@
 <!-- popup.html -->
 <html>
-<head>
-  <title>TSPi Appian Dev Tools</title>
-  <script src="js/popup.js"></script>
-  <script src="js/helperFunctions.js"></script>
-</head>
-<body>
-    <img src='tspi-transparent-logo.png' id='tspi_logo' alt='tspi logo' width='100px'>
-    <button id='btn-create-rfr'>Create RFR</button>
-<!-- Hiding until future development -->
-<!--    <button id='btn-load-rfr'>Load RFR</button> -->
-</body>
+  <head>
+    <title>TSPi Appian Dev Tools</title>
+    <link rel='stylesheet' href='css/popup.css'>
+    <script src='js/popup.js'></script>
+    <script src='js/helperFunctions.js'></script>
+  </head>
+  <body>
+    <div id='main' >
+      <div id='title-container'>
+        <img src='tspi-transparent-logo.png' id='tspi_logo' alt='tspi logo' width='100px'>
+        <h3 id='title'>Developer Tools</h3>
+      </div>
+      <hr>
+      <p class='section-title'>Code Review Tools:</p>
+      <div class='button-container'>
+        <button id='btn-create-rfr' title='Populates an RFR template with the objects of the current application'>Create RFR Template</button>
+        <!-- Hiding until future development -->
+        <!--    <button id='btn-load-rfr'>Load RFR</button> -->
+      </div>
+      <br>
+      <p class='section-title'>Documentation Tools:</p>
+      <div class='button-container'>
+        <button id='btn-new-constant' title='Creates a changelog in the description field with the current date, ticket number, and constant value'>New Constant</button>
+        <button id='btn-changelog-constant' title='Generates a new changelog entry for a constant and copies it to the clipboard'>Constant Changelog</button>
+      </div>
+  </body>
 </html>

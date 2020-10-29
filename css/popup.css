@@ -1,0 +1,28 @@
+/* popup.css */
+/* Configures the popup window */
+#main {
+   width: 175px;
+}
+/* All contents of the popup */
+#title-container {
+  display: flex;
+}
+
+#title {
+  padding-left: 5px;
+}
+
+.button-container {
+  display: flex;
+}
+
+.button-container > button {
+  margin: 5px;
+  width: 80px;
+  /* width: 50%; */
+}
+
+.section-title {
+  display: inline;
+  font-weight: bold;
+}
