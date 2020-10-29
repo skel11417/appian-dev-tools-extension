@@ -177,7 +177,7 @@ function addChangelogEntryToConstant (developerName) {
   let jiraTicket = getTicketFromApplicationName(applicationName)
   let descriptionIndex = isNewConstant() ? 2 : 1
   let existingDescription = getElementOfConstantForm(descriptionIndex).value
-  let changelogEntry = `<${formatDate()}><${jiraTicket}><${developerName}>
+  let changelogEntry = `<${formatDate()}><${jiraTicket}><${developerName}><Version Prior to Change: >
   --
 
 `
