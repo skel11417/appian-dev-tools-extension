@@ -131,6 +131,7 @@ function getConstantType () {
   return getElementOfConstantForm(typeIndex).firstElementChild.innerText
 }
 
+// determineIfConstantIsMultiple
 function determineIfConstantIsMultiple () {
   // Determine the index of the value field based on whether this is a new or
   // existing constant
@@ -147,6 +148,7 @@ function getConstantValue () {
   return getElementOfConstantForm(valueIndex).value
 }
 
+// renderConstantDocumentation
 function renderConstantDocumentation (constantValue, developerName) {
   let applicationName = getApplicationName();
   let jiraTicket = getTicketFromApplicationName(applicationName)
@@ -167,6 +169,25 @@ Value: ${constantValue}
   -- Created
 
 */`
+}
+
+// addChangelogEntryToConstant
+function addChangelogEntryToConstant (developerName) {
+  let applicationName = getApplicationName();
+  let jiraTicket = getTicketFromApplicationName(applicationName)
+  let descriptionIndex = isNewConstant() ? 2 : 1
+  let existingDescription = getElementOfConstantForm(descriptionIndex).value
+  let changelogEntry = `<${formatDate()}><${jiraTicket}><${developerName}>
+  --
+
+`
+  let changelogIndex = existingDescription.match(/<[\d||\-]+><[\d||\-||\w]+><.+>.?/).index;
+  let newDescription = [
+    existingDescription.slice(0, changelogIndex),
+    changelogEntry,
+    existingDescription.slice(changelogIndex)
+   ].join('');
+   getElementOfConstantForm(descriptionIndex).value = newDescription
 }
 
 // formatRadioValue
