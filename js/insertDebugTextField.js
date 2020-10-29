@@ -5,7 +5,7 @@ function insertDebugTextField() {
 a!textField(
   label: "DEBUG",
   readOnly: true,
-  value:
+  value: ""
 ),`
 }
 

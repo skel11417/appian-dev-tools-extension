@@ -45,20 +45,7 @@ contextMenus.generateRuleComments =
         }
       )
 
-    // Insert Debug Box Component
-    contextMenus.insertDebugBoxComponent =
-      chrome.contextMenus.create(
-        {
-          "title": "Insert Debug Box Component",
-          "contexts": ["editable","page"],
-          "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
-        },
-        function(){
-          if(chrome.runtime.lastError){
-            console.log(chrome.runtime.lastError.message)
-          }
-        }
-      )
+
 
 // contextMenuHandler
 function contextMenuHandler(info, tab){
@@ -76,11 +63,6 @@ function contextMenuHandler(info, tab){
     case contextMenus.insertDebugTextField:
       chrome.tabs.executeScript({
         file: 'js/insertDebugTextField.js'
-      })
-      break;
-    case contextMenus.insertDebugBoxComponent:
-      chrome.tabs.executeScript({
-        file: 'js/insertDebugBoxComponent.js'
       })
       break;
     // default:
