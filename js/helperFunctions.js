@@ -6,15 +6,16 @@ function getRuleName () {
 }
 
 // getDeveloperNameWithPrompt
-function getDeveloperNameWithPrompt() {
-  let developerName = ""
-  // Get the developer's name via a prompt
-  developerName = window.prompt(
-    "Enter your name",
-    "No Name"
-  )
-  return developerName
-}
+// Commented out because of not being able to successfully implement this
+// function getDeveloperNameWithPrompt() {
+//   let developerName = ""
+//   // Get the developer's name via a prompt
+//   developerName = window.prompt(
+//     "Enter your name",
+//     "No Name"
+//   )
+//   return developerName
+// }
 
 function formatDate () {
   let today = new Date()
@@ -106,6 +107,42 @@ function getTicketFromApplicationName (applicationName) {
 // getApplicationLink
 function getApplicationLink () {
   return window.location.href
+}
+
+function getInputOfConstantForm (elementIndex) {
+  return document.querySelector(".HeaderContentFooterLayout---HCF_layout").children[1].firstChild.children[elementIndex].children[1].firstChild.firstChild
+}
+
+// getConstantName
+function getConstantName () {
+  return getInputOfConstantForm(1).value
+}
+
+function determineIfConstantIsMultiple () {
+  // Check the type of the input field for the constant value */
+  let fieldType = getInputOfConstantForm(5).type
+  /* The constant is a multiple if the field is of type textArea */
+  return fieldType === "textarea"
+}
+
+// getConstantValue
+function getConstantValue () {
+  return getInputOfConstantForm(5).value
+}
+
+function renderConstantDocumentation (constantValue, developerName) {
+  let applicationName = getApplicationName();
+  let jiraTicket = getTicketFromApplicationName(applicationName)
+  let existingDescription = getInputOfConstantForm(2).value
+  getInputOfConstantForm(2).value = `${existingDescription}
+
+Value: ${constantValue}
+/*
+////////////////////////////// CHANGE LOG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+<${formatDate()}><${jiraTicket}><${developerName}>
+  -- Created
+
+*/`
 }
 
 // formatRadioValue

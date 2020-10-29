@@ -51,6 +51,42 @@ chrome.runtime.onMessage.addListener(function(request){
     })
   }
 
+  else if (request === 'documentConstant') {
+    chrome.storage.local.get('developerName', function (result) {
+      let developerName
+      if (result.developerName){
+        developerName = result.developerName
+      } else {
+        // Get the developer's name via a prompt
+        developerName = window.prompt(
+          "Enter your name",
+          "No Name"
+        )
+        // Save the name
+        chrome.storage.local.set({developerName: developerName}, function() {
+          console.log('Developer name set to ' + developerName);
+        })
+      }
+
+      let constantValue = getConstantValue();
+      let isConstantMultiple = determineIfConstantIsMultiple();
+      if ( constantValue === "" ) {
+        alert("Enter a value for the constant")
+      }
+      // Replace value if constant is set to multiple
+      else if ( isConstantMultiple ) {
+        renderConstantDocumentation("Contains multiple values", developerName)
+      }
+      // Do not write value if value length is extremely long
+      else if (constantValue.length > 300) {
+        renderConstantDocumentation("", developerName)
+      }
+      else {
+        renderConstantDocumentation(constantValue, developerName)
+      }
+    })
+  }
+
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {
