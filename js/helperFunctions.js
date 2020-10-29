@@ -109,32 +109,51 @@ function getApplicationLink () {
   return window.location.href
 }
 
-function getInputOfConstantForm (elementIndex) {
+
+// getElementOfConstantForm
+function getElementOfConstantForm (elementIndex) {
   return document.querySelector(".HeaderContentFooterLayout---HCF_layout").children[1].firstChild.children[elementIndex].children[1].firstChild.firstChild
 }
 
-// getConstantName
-function getConstantName () {
-  return getInputOfConstantForm(1).value
+// isNewConstant
+function isNewConstant () {
+  return document.querySelector(".HeaderContentFooterLayout---HCF_layout").children[1].firstChild.childElementCount === 9
+}
+
+// getConstantType
+function getConstantType () {
+  let typeIndex = isNewConstant() ? 3 : 2
+  return getElementOfConstantForm(typeIndex).firstElementChild.innerText
 }
 
 function determineIfConstantIsMultiple () {
-  // Check the type of the input field for the constant value */
-  let fieldType = getInputOfConstantForm(5).type
-  /* The constant is a multiple if the field is of type textArea */
-  return fieldType === "textarea"
+  // Determine the index of the value field based on whether this is a new or
+  // existing constant
+  let valueIndex = isNewConstant() ? 5 : 4
+  /* The constant is a multiple if the field is of type textarea */
+  return getElementOfConstantForm(valueIndex).type === "textarea"
 }
 
 // getConstantValue
 function getConstantValue () {
-  return getInputOfConstantForm(5).value
+  // Determine the index of the value field based on whether this is a new or
+  // existing constant
+  let valueIndex = isNewConstant() ? 5 : 4
+  return getElementOfConstantForm(valueIndex).value
 }
 
 function renderConstantDocumentation (constantValue, developerName) {
   let applicationName = getApplicationName();
   let jiraTicket = getTicketFromApplicationName(applicationName)
-  let existingDescription = getInputOfConstantForm(2).value
-  getInputOfConstantForm(2).value = `${existingDescription}
+  let descriptionIndex = isNewConstant() ? 2 : 1
+  if ( getConstantType() === "Text" ) {
+    // Wrap the constant value in quotes if it is a text value
+    constantValue = "\"" + constantValue + "\""
+  }
+  let existingDescription = getElementOfConstantForm(descriptionIndex).value
+  // Set the value of the description equal to any existing description and
+  // the value plus a changelog
+  getElementOfConstantForm(descriptionIndex).value = `${existingDescription}
 
 Value: ${constantValue}
 /*
