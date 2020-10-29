@@ -51,8 +51,11 @@ chrome.runtime.onMessage.addListener(function(request){
     })
   }
 
+  // Execute code to create documentation for a constant
   else if (request === 'documentConstant') {
-    chrome.storage.local.get('developerName', function (result) {
+    // Execute code only if the constant window appears on screen
+    if ( isEnabledConstantTools() ) {
+      chrome.storage.local.get('developerName', function (result) {
       let developerName
       if (result.developerName){
         developerName = result.developerName
@@ -85,8 +88,37 @@ chrome.runtime.onMessage.addListener(function(request){
         renderConstantDocumentation(constantValue, developerName)
       }
     })
+    }
+    else {
+      alert("No constant selected")
+    }
   }
 
+  // Execute request to add a changelog entry to a constant
+  else if (request === 'addChangelogEntry') {
+    // Execute code only if the constant window appears on screen
+    if ( isEnabledConstantTools() ) {
+      chrome.storage.local.get('developerName', function (result) {
+        let developerName
+        if (result.developerName){
+          developerName = result.developerName
+        } else {
+          // Get the developer's name via a prompt
+          developerName = window.prompt(
+            "Enter your name",
+            "No Name"
+          )
+          // Save the name
+          chrome.storage.local.set({developerName: developerName}, function() {
+            console.log('Developer name set to ' + developerName);
+          })
+        }
+      })
+    }
+    else {
+      alert("No constant selected")
+    }
+  }
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {

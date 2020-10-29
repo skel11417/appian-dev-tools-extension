@@ -109,6 +109,11 @@ function getApplicationLink () {
   return window.location.href
 }
 
+// isEnabledConstantTools
+function isEnabledConstantTools () {
+  let constantForm = document.querySelector(".HeaderContentFooterLayout---HCF_layout")
+  return constantForm ? true : false
+}
 
 // getElementOfConstantForm
 function getElementOfConstantForm (elementIndex) {
