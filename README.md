@@ -14,6 +14,9 @@ A chrome extension for Appian developers at TSPi
 
 ### Changelog
 
+#### Version 3.1
+* Fixed bug created by changes to HTML in Appian 20.3
+
 #### Version 3.0
 * **New Look** The extension interface has been updated
 * **New Constant Tools** There are new documentation generation tools available for Constants
