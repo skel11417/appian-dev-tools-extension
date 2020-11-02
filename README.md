@@ -14,6 +14,9 @@ A chrome extension for Appian developers at TSPi
 
 ### Changelog
 
+#### Version 3.2
+* Fixed bug caused by application names that do not match a Jira ticket
+
 #### Version 3.1
 * Fixed bug created by changes to HTML in Appian 20.3
 
