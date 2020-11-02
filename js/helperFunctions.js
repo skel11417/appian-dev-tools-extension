@@ -101,7 +101,12 @@ function getApplicationName () {
 function getTicketFromApplicationName (applicationName) {
   let ticketNameRegex = /([A-Z]+)(\s.+|)-(\d+)/
   let matches = applicationName.match(ticketNameRegex)
-  return matches[1] + "-" + matches[3]
+  if ( matches ) {
+    return matches[1] + "-" + matches[3]
+  }
+  else {
+    return "TICKET"
+  }
 }
 
 // getApplicationLink
