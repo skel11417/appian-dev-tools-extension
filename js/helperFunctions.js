@@ -83,11 +83,17 @@ function sortObjects (objectsArray) {
   return [...objectsArray].sort(compareObjectTypes)
 }
 
+// formatChangeList
+function formatChangeList (changeList) {
+  let regex = /\s{0,2}--\s{0,3}/g
+  return changeList.replaceAll(regex, "* ")
+}
+
 // renderObjectsArray
 function renderObjectsArray (objectsArray) {
   let outputString = ""
   const sortedArray = sortObjects(objectsArray)
-  const formattedRows = sortedArray.map(object => `|${object.objectType}|${object.objectName}|${object.changeList}|`)
+  const formattedRows = sortedArray.map(object => `|${object.objectType}|${object.objectName}|${formatChangeList(object.changeList)}|`)
   formattedRows.forEach(row => {outputString += row + "\n"})
   return outputString
 }
