@@ -2,7 +2,7 @@
 {
   "manifest_version": 2,
   "name": "TSPi Appian Developer Tools",
-  "version": "2.0",
+  "version": "3.3",
   "description": "Helpful tools for developing in Appian",
   "browser_action": {
     "default_popup": "popup.html"
