@@ -14,6 +14,9 @@ A chrome extension for Appian developers at TSPi
 
 ### Changelog
 
+#### Version 3.3
+* Added ability to change developer name (in case you entered it accidentally the first time)
+
 #### Version 3.2
 * Fixed bug caused by application names that do not match a Jira ticket
 
