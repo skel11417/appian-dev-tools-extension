@@ -120,6 +120,26 @@ chrome.runtime.onMessage.addListener(function(request){
       alert("No constant selected")
     }
   }
+  // Reset the developer name
+  else if (request === 'changeDeveloperName') {
+    chrome.storage.local.get('developerName', function (result) {
+      let developerName
+      if (result.developerName){
+        developerName = result.developerName
+      }
+      // Get the developer's name via a prompt
+      developerName = window.prompt(
+        "Enter your name",
+        developerName
+      )
+      // Save the name if the user has entered one
+      if (developerName) {
+        chrome.storage.local.set({developerName: developerName}, function() {
+          console.log('Developer name set to ' + developerName);
+        })
+      }
+    })
+  }
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {
