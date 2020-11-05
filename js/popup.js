@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', function(){
   // Add a changelog entry to a constant
   document.querySelector('#btn-changelog-constant').addEventListener('click', () => onClick('addChangelogEntry'), false)
 
+  // Update the developer's name
   document.querySelector('#link-change-developer').addEventListener('click', () => onClick('changeDeveloperName'), false)
 
   // Load the existing RFR for the app
