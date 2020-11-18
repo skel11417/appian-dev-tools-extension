@@ -1,18 +1,15 @@
 # Appian Developer Tools Extension
 
 *A chrome extension for Appian developers at TSPi*
-* [Features](#Features)
-  * [Create Documentation For Rules/Interfaces](#Create-Documentation-For-Rules/Interfaces)
-  * [Add Changelog Entry For Rules/Interfaces](#Add-Changelog-Entry-For-Rules/Interfaces)
-  * [Add a Debug Text Field to Interfaces](#Add-a-Debug-Text-Field-to-Interfaces)
 * [Installation Instructions](#Installation-Instructions)
+* [Features](#Features)
+  * [Create Documentation for Rules and Interfaces](#Create-Documentation-for-Rules-and-Interfaces)
+  * [Create Documentation for New Constants](#Create-Documentation-for-New-Constants)
+  * [Add Changelog Entry for Rules/Interfaces](#Add-Changelog-Entry-for-Rules-and-Interfaces)
+  * [Generate RFR Template for App](#Generate-RFR-Template-for-App)
+  * [Add a Debug Text Field to Interfaces](#Add-a-Debug-Text-Field-to-Interfaces)
+* [Planned Enhancements](#Planned-Enhancements)
 * [Changelog](#Changelog)
----
-### Features
-#### Create Documentation For Rules/Interfaces
-#### Add Changelog Entry For Rules/Interfaces
-#### Add a Debug Text Field to Interfaces
-
 ----
 ### Installation Instructions
 1. Download the repository and extract the folder contents to your local disk.
@@ -21,8 +18,65 @@
 4. Click Load Unpacked.
 5. Navigate to the directory where you extracted the zip folder and click "Select."
 6. You can now begin using the extension.
+---
+### Features
+#### Create Documentation for Rules and Interfaces
+1. Right click in the expression editor of an empty rule or interface and select **Generate Rule Comments** from the *TSPi Appian Developer Tools* context menu
+![Generate Rule Comments](screenshots/generate_rule_comments_1.png)
+2. You will be prompted to enter the ticket number for the object. *Note: if this is the first time you are using the extension, you will be prompted to enter the developer name first.*
+![Enter Ticket Number](screenshots/generate_rule_comments_2.png)
+3. The rule will then be populated with a header and changelog with the first changelog entry already populated.
+![Generate Rule Comments Result](screenshots/generate_rule_comments_3.png)
 
+#### Create Documentation for New Constants
+1. With the Create Constant window open, click the *Appian Developer Tools* extension and under *Constant Tools* select **Document Constant**.
+![Document Constant](screenshots/document_constant_1.png)
+2. The current value will be added to the description field along with the changelog with the first changelog entry already populated.
+![Document Constant Result](screenshots/document_constant_2.png)
 
+#### Add Changelog Entry for Rules and Interfaces
+1. Right click in the expression editor of an empty rule or interface and select **Generate Changelog Entry** from the *TSPi Appian Developer Tools* context menu.
+![Generate Changelog Entry](screenshots/generate_changelog_entry_1.png)
+2. You will be prompted to enter the ticket number for the object. *Note: if this is the first time you are using the extension, you will be prompted to enter the developer name first.*
+![Enter Ticket Number](screenshots/generate_changelog_entry_2.png)
+3. You will be prompted to enter the previous version of the object. *Note: if you do not know this, you can click OK and add the previous version later.*
+![Enter Version Prior to Change](screenshots/generate_changelog_entry_3.png)
+4. A new changelog entry will be added at the location where you right clicked.
+![Generate Changelog Entry Result](screenshots/generate_changelog_entry_4.png)
+
+#### Add Changelog Entry for Existing Constants
+1. With the Create Constant window open, click the *Appian Developer Tools* extension and under *Constant Tools* select **Add Changelog Entry**.
+![Add Changelog to Constant](screenshots/add_constant_changelog_entry_1.png)
+2. A new changelog entry with the current will be added below the CHANGELOG heading. *Note: you will need to manually enter the previous version*
+![Add Changelog to Constant Result](screenshots/add_constant_changelog_entry_2.png)
+
+#### Generate RFR Template for App
+1. With the app you would like to document open, click the *Appian Developer Tools* extension, and under *Constant Tools* select **Create RFR Template**. *Note: at this time, only the first 25 objects of an app will be added to the RFR changelog section.*
+![Generate RFR Template](screenshots/rfr_template_1.png)
+2. A new tab will open with the RFR Editor form, prepopulated with the developer name and application.
+![Blank RFR Template](screenshots/rfr_template_2.png)
+3. Once you have filled out the form, click **Generate Markdown** at the bottom of the form.
+![Generate Markdown](screenshots/rfr_template_3.png)
+4. A window will appear with the Jira markdown text generated from the values you entered into the editor form. You can copy the text manually, or click **Copy to Clipboard** to copy the contents to the Clipboard
+![Generate Markdown Result](screenshots/rfr_template_4.png)
+
+#### Add a Debug Text Field to Interfaces
+1. If you would like to debug something in an interface that cannot be accomplished through the native variable list, you can right click in the interface and select **Insert Debug Text Field Component** from the *TSPi Appian Developer Tools* context menu.
+![Insert Debug Text Field Component](screenshots/add_debug_text_1.png)
+2. A pre-configured read-only text field will be added in the location where you clicked.
+![Insert Debug Text Field Component Result](screenshots/add_debug_text_2.png)
+----
+### Installation Instructions
+1. Download the repository and extract the folder contents to your local disk.
+2. Open [Chrome Extensions](chrome://extensions).
+3. In the top right, enable "Developer Mode."
+4. Click Load Unpacked.
+5. Navigate to the directory where you extracted the zip folder and click "Select."
+6. You can now begin using the extension.
+---
+### Planned Enhancements
+1. Storing and editing of existing RFR templates.
+2. Code Reviewer Tools
 ---
 ### Changelog
 #### Version 3.3
