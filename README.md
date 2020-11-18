@@ -1,10 +1,17 @@
 # Appian Developer Tools Extension
 
-A chrome extension for Appian developers at TSPi
-
-* [Installation Instructions](#-Installation_Instructions)
-
+*A chrome extension for Appian developers at TSPi*
+* [Features](#Features)
+  * [Create Documentation For Rules/Interfaces](#Create-Documentation-For-Rules/Interfaces)
+  * [Add Changelog Entry For Rules/Interfaces](#Add-Changelog-Entry-For-Rules/Interfaces)
+  * [Add a Debug Text Field to Interfaces](#Add-a-Debug-Text-Field-to-Interfaces)
+* [Installation Instructions](#Installation-Instructions)
 * [Changelog](#Changelog)
+---
+### Features
+#### Create Documentation For Rules/Interfaces
+#### Add Changelog Entry For Rules/Interfaces
+#### Add a Debug Text Field to Interfaces
 
 ----
 ### Installation Instructions
@@ -16,8 +23,8 @@ A chrome extension for Appian developers at TSPi
 6. You can now begin using the extension.
 
 
+---
 ### Changelog
-
 #### Version 3.3
 * Added ability to change developer name (in case you entered it accidentally the first time)
 
