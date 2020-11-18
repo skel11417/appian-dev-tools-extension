@@ -2,6 +2,10 @@
 
 A chrome extension for Appian developers at TSPi
 
+* [Installation Instructions](#-Installation_Instructions)
+
+* [Changelog](#Changelog)
+
 ----
 ### Installation Instructions
 1. Download the repository and extract the folder contents to your local disk.
