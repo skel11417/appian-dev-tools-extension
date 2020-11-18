@@ -5,20 +5,12 @@
 * [Features](#Features)
   * [Create Documentation for Rules and Interfaces](#Create-Documentation-for-Rules-and-Interfaces)
   * [Create Documentation for New Constants](#Create-Documentation-for-New-Constants)
-  * [Add Changelog Entry for Rules/Interfaces](#Add-Changelog-Entry-for-Rules-and-Interfaces)
+  * [Add Changelog Entry for Rules and Interfaces](#Add-Changelog-Entry-for-Rules-and-Interfaces)
   * [Generate RFR Template for App](#Generate-RFR-Template-for-App)
   * [Add a Debug Text Field to Interfaces](#Add-a-Debug-Text-Field-to-Interfaces)
 * [Planned Enhancements](#Planned-Enhancements)
 * [Changelog](#Changelog)
 ----
-### Installation Instructions
-1. Download the repository and extract the folder contents to your local disk.
-2. Open [Chrome Extensions](chrome://extensions).
-3. In the top right, enable "Developer Mode."
-4. Click Load Unpacked.
-5. Navigate to the directory where you extracted the zip folder and click "Select."
-6. You can now begin using the extension.
----
 ### Features
 #### Create Documentation for Rules and Interfaces
 1. Right click in the expression editor of an empty rule or interface and select **Generate Rule Comments** from the *TSPi Appian Developer Tools* context menu
@@ -77,6 +69,7 @@
 ### Planned Enhancements
 1. Storing and editing of existing RFR templates.
 2. Code Reviewer Tools
+3. Integration with Jira API
 ---
 ### Changelog
 #### Version 3.3
