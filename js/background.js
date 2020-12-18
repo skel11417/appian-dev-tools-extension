@@ -1,3 +1,4 @@
+// contextMenus
 const contextMenus = {};
 
 // Create Rule Comments
@@ -31,6 +32,21 @@ contextMenus.generateRuleComments =
     )
 
     // Insert Debug Text Field Component
+    contextMenus.replaceNativeComponentsWithWrappers =
+      chrome.contextMenus.create(
+        {
+          "title": "Replace Native Components with Wrappers",
+          "contexts": ["selection"],
+          "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+        },
+        function(){
+          if(chrome.runtime.lastError){
+            console.log(chrome.runtime.lastError.message)
+          }
+        }
+      )
+
+    // Insert Debug Text Field Component
     contextMenus.insertDebugTextField =
       chrome.contextMenus.create(
         {
@@ -58,6 +74,11 @@ function contextMenuHandler(info, tab){
     case contextMenus.generateChangeLogEntry:
       chrome.tabs.executeScript({
         file: 'js/generateChangeLogEntry.js'
+      })
+      break;
+    case contextMenus.replaceNativeComponentsWithWrappers:
+      chrome.tabs.executeScript({
+        file: 'js/replaceNativeComponentsWithWrappers.js'
       })
       break;
     case contextMenus.insertDebugTextField:
