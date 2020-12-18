@@ -57,6 +57,12 @@
 ![Insert Debug Text Field Component](/screenshots/add_debug_text_1.PNG)
 2. A pre-configured read-only text field will be added in the location where you clicked.
 ![Insert Debug Text Field Component Result](/screenshots/add_debug_text_2.PNG)
+
+### Replace Native Components with Wrappers
+1. If you would like to replace a native Appian component (prefixed with *a!*), you can right click in the interface and select **Replace Native Components With Wrappers** from the *TSPi Appian Developer Tools* context menu.
+![Insert Debug Text Field Component](/screenshots/replace_with_wrappers_1.PNG)
+2. The native components will all be replaced, except for those components which do not have wrappers (a!save, a!forEach, etc.).
+![Insert Debug Text Field Component Result](/screenshots/replace_with_wrappers_2.PNG)
 ----
 ## Installation Instructions
 1. Download the repository and extract the folder contents to your local disk.
@@ -72,6 +78,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.4
+* Added a new context menu which allows you to replace the native Appian components in selected code with TSPi wrapper components
+
 ### Version 3.3
 * Added ability to change developer name (in case you entered it accidentally the first time)
 
