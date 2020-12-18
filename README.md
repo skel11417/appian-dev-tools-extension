@@ -8,6 +8,7 @@
   * [Add Changelog Entry for Rules and Interfaces](#Add-Changelog-Entry-for-Rules-and-Interfaces)
   * [Generate RFR Template for App](#Generate-RFR-Template-for-App)
   * [Add a Debug Text Field to Interfaces](#Add-a-Debug-Text-Field-to-Interfaces)
+  * [Replace Native Components with Wrappers](#Replace-Native-Components-with-Wrappers)
 * [Planned Enhancements](#Planned-Enhancements)
 * [Changelog](#Changelog)
 ----
