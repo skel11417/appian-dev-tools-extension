@@ -138,9 +138,8 @@ function createObjectTableRow (object) {
 function copyToClipboard(event) {
   event.preventDefault()
   let textToCopy = document.querySelector('#markdown-text-area')
-  textToCopy.select();
-  document.execCommand("copy");
-  alert("Copied to clipboard");
+  textToCopy.select()
+  document.execCommand("copy")
 }
 
 // onGenerateMarkdown
@@ -148,6 +147,7 @@ function onGenerateMarkdown (event) {
     event.preventDefault()
     // Collect all data from the RFR Template Editor
     let rfrData = getValuesFromRFRTemplate()
+    const JIRA_URL = "https://technologysolutions.atlassian.net/browse/"
     // ***************
     // Save this data to local storage, then render it as markdown
     // and enter it into the text area
@@ -166,6 +166,13 @@ function onGenerateMarkdown (event) {
     copyToClipboardButton.innerHTML = "Copy to Clipboard";
     copyToClipboardButton.addEventListener("click", copyToClipboard)
 
+    // Create link to Jira ticket (in old issue view)
+    let jiraTicketLink = document.createElement('a')
+    let linkText = document.createTextNode("Go to Jira Ticket");
+    jiraTicketLink.appendChild(linkText);
+    jiraTicketLink.title = "Go to Jira Ticket";
+    jiraTicketLink.href = JIRA_URL + rfrData.jiraTicket + "?oldIssueView=true"
+
     // Clear Template editor and button
     document.querySelector("#rfr-editor").remove()
     document.querySelector("#submit").remove()
@@ -173,6 +180,7 @@ function onGenerateMarkdown (event) {
     let container = document.querySelector('.container')
     container.appendChild(markdownTextArea)
     container.appendChild(copyToClipboardButton)
+    container.appendChild(jiraTicketLink)
   }
 
 
