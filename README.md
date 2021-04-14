@@ -79,6 +79,11 @@
 3. Integration with Jira API
 ---
 ## Changelog
+
+### Version 3.5
+* In order to deal with the new issue view in Jira becoming more difficult to avoid, added a link to the Jira ticket of an RFR to the page where the developer can copy the markdown code. This link includes a parameter "oldIssueView=true", which allows the user to paste the markdown into the RFR field without the formatting becoming lost.
+* Removed the alert that appears when a developer clicks "Copy to Clipboard", as it was annoying.
+
 ### Version 3.4
 * Added a new context menu which allows you to replace the native Appian components in selected code with TSPi wrapper components
 
