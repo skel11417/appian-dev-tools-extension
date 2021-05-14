@@ -85,8 +85,12 @@ function sortObjects (objectsArray) {
 
 // formatChangeList
 function formatChangeList (changeList) {
-  let regex = /\s{0,2}--\s{0,3}/g
-  return changeList.replaceAll(regex, "* ")
+  if (changeList) {
+    let regex = /\s{0,2}--\s{0,3}/g
+    return changeList.replaceAll(regex, "* ")
+  } else {
+    return "* Created"
+  }
 }
 
 // renderObjectsArray
