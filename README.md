@@ -80,6 +80,9 @@
 ---
 ## Changelog
 
+### Version 3.7
+* Now users can leave the change list of an object blank when filling out an RFR template, and "* Created" will be added to the markdown for the object by default.
+
 ### Version 3.6
 * Fixed compatibility issue with Appian 21.1
 
