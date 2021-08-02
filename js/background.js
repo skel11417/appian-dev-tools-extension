@@ -46,6 +46,21 @@ contextMenus.generateRuleComments =
         }
       )
 
+    // Convert to/from index function
+    contextMenus.convertToOrFromIndexFunction =
+      chrome.contextMenus.create(
+        {
+          "title": "Convert to/from index function",
+          "contexts": ["selection"],
+          "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+        },
+        function(){
+          if(chrome.runtime.lastError){
+            console.log(chrome.runtime.lastError.message)
+          }
+        }
+      )
+
     // Insert Debug Text Field Component
     contextMenus.insertDebugTextField =
       chrome.contextMenus.create(
@@ -84,6 +99,11 @@ function contextMenuHandler(info, tab){
     case contextMenus.insertDebugTextField:
       chrome.tabs.executeScript({
         file: 'js/insertDebugTextField.js'
+      })
+      break;
+    case contextMenus.convertToOrFromIndexFunction:
+      chrome.tabs.executeScript({
+        file: 'js/convertToOrFromIndexFunction.js'
       })
       break;
     // default:
