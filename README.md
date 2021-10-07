@@ -64,6 +64,12 @@
 ![Insert Debug Text Field Component](/screenshots/replace_with_wrappers_1.PNG)
 2. The native components will all be replaced, except for those components which do not have wrappers (a!save, a!forEach, etc.).
 ![Insert Debug Text Field Component Result](/screenshots/replace_with_wrappers_2.PNG)
+
+### Convert to/from index()
+1. Highlight the code you wish to convert and select **Convert to/from Index Function**
+![Convert To or From Index Action](/screenshots/convert_from_index_function_1.PNG)
+2. The highlighted text will be replaced with the equivalent code in dot notation (or using index())
+![Convert To or From Index Action](/screenshots/convert_from_index_function_2.PNG)
 ----
 ## Installation Instructions
 1. Download the repository and extract the folder contents to your local disk.
@@ -79,6 +85,14 @@
 3. Integration with Jira API
 ---
 ## Changelog
+
+### Version 3.8
+* Added **Convert to/from index function** as a context menu option. Users can select an instance of index() *or* a dot-notated variable and convert the code to or from index() notation, eg.
+```
+index(ri!user, "username", {}) => ri!user.username
+  OR
+local!user.username => index(local!user, "username", {})
+```
 
 ### Version 3.7
 * Now users can leave the change list of an object blank when filling out an RFR template, and "* Created" will be added to the markdown for the object by default.
