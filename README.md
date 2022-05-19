@@ -86,6 +86,9 @@
 ---
 ## Changelog
 
+### Version 3.9
+* Updated **Convert to/from index function** to work with variables prefixed with the fv!domain
+
 ### Version 3.8
 * Added **Convert to/from index function** as a context menu option. Users can select an instance of index() *or* a dot-notated variable and convert the code to or from index() notation, eg.
 ```
