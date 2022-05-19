@@ -1,11 +1,12 @@
 // convertToOrFromIndexFunction
 function convertToOrFromIndexFunction() {
-  const variableNameRegex = /local!\w+|ri!\w+/g
+  const variableNameRegex = /local!\w+|ri!\w+|fv!\w+/g
   const indexNotationFieldNameRegex = /"(\w+)/
-  const dotNotationFieldNameRegex = /local!\w+\.(\w+)|ri!\w+\.(\w+)|/
+  const dotNotationFieldNameRegex = /(local!|ri!|fv!)\w+\.(\w+)/
 
   let textSelection = window.getSelection()
   let textString = textSelection.toString()
+  console.log(textString.match(variableNameRegex))
   let variableName = textString.match(variableNameRegex)[0]
 
   if ( textString.includes("index(") ) {
