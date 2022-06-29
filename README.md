@@ -85,6 +85,8 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.10
+* Updated RFR Template code to work on Appian 22.2
 
 ### Version 3.9
 * Updated **Convert to/from index function** to work with variables prefixed with the fv!domain
