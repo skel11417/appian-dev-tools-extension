@@ -27,7 +27,7 @@ function formatDate () {
 
 // getAllObjectsOnPage
 function getAllObjectsOnPage () {
-  const objectTable = document.querySelector("#content > div.SailContainerWeb---sailcontents.appian-context-browser-chrome.appian-context-os-windows.appian-context-ux-page-size-tablet-landscape > div > div > div.HeaderBodyLayout---pane_frame > div > div.VirtualPane---pane.VirtualPane---expanded > div > div > div > div > div.SplitPaneLayout---pane.SplitPaneLayout---secondary_pane > div > div > div.MultiColumnLayout---column_layout.MultiColumnLayout---margin_above_none.MultiColumnLayout---stack_when_phone.appian-context-last-in-list > div > div > div.FieldLayout---input_below > div > div.PagingGridLayout---scrollable_content > table > tbody")
+  const objectTable = document.querySelector("tbody")
   const objectsSubArray = []
   for (let objectRow of objectTable.rows) {
     let objectType = objectRow.children[1].firstChild.firstChild.alt
