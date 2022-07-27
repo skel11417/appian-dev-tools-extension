@@ -31,11 +31,13 @@ chrome.storage.local.get('developerName', function (result) {
     // default response
     ""
   );
+  // Conditionally set the listBullet based on the ticket application prefix
+  let listBullet = (ticket.substring(0, 3) === "ECO") ? "--" : "*";
 
   let date = formatDate()
 
   document.activeElement.value=
 `<${date}><${ticket}><${developerName}><Version Prior to Change: ${priorVersion}>
-  --
+  ${listBullet}
   `
 })
