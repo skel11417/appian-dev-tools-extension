@@ -26,9 +26,11 @@ chrome.storage.local.get('developerName', function (result) {
     // default response
     "NO TICKET"
   );
-
+  // Conditionally set the listBullet based on the ticket application prefix
+  let listBullet = (ticket.substring(0, 3) === "ECO") ? "--" : "*";
   let date = formatDate()
 
+  /* Paste rule comments */
   document.activeElement.value=
   `/*
   ${ruleName}(
@@ -43,7 +45,7 @@ chrome.storage.local.get('developerName', function (result) {
 ////////////////////////////// CHANGE LOG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 <${date}><${ticket}><${developerName}>
-  -- Created
+  ${listBullet} Created
 
 */
 `
