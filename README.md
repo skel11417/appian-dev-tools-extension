@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.11
+* Updated the Generate Changelog Entry and Generate Rule Comments context menus to use an asterisk "*" instead of "--" when the ticket type entered is other than "ECO"
+
 ### Version 3.10
 * Updated RFR Template code to work on Appian 22.2
 
