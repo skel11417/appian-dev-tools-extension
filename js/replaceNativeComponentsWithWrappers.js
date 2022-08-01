@@ -33,7 +33,7 @@ function replaceNativeComponents() {
     let nativeComponents = getNativeComponentsFromSelection(allText)
 
     if (nativeComponents) {
-        const COMPONENTS_WITHOUT_WRAPPERS = ['a!save', 'a!localVariables', 'a!recordActionItem', 'a!recordActionField', 'a!forEach', ' a!gaugeField()']
+        const COMPONENTS_WITHOUT_WRAPPERS = ['a!save', 'a!localVariables', 'a!recordActionItem', 'a!recordActionField', 'a!forEach', ' a!gaugeField', 'a!map', 'a!lineChartField', 'a!barChartField', 'a!pieChartField', 'a!isNullOrEmpty', 'a!isNotNullOrEmpty']
         let replaceableComponents = nativeComponents.filter(component => !COMPONENTS_WITHOUT_WRAPPERS.includes(component))
 
 
