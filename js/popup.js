@@ -13,6 +13,9 @@ document.addEventListener('DOMContentLoaded', function(){
   // Update the developer's name
   document.querySelector('#link-change-developer').addEventListener('click', () => onClick('changeDeveloperName'), false)
 
+  // Open process monitoring for the current environment
+  document.querySelector('#open-environment-process-monitoring').addEventListener('click', () => onClick('openProcessMonitor'), false)
+
   // Load the existing RFR for the app
   // document.querySelector('#btn-load-rfr').addEventListener('click', () => onClick('load'), false)
 

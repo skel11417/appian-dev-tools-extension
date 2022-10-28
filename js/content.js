@@ -140,6 +140,12 @@ chrome.runtime.onMessage.addListener(function(request){
       }
     })
   }
+
+  // Open the process monitoring for the current environment
+  else if (request === 'openProcessMonitor') {
+    openProcessMonitor()
+  }
+
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {

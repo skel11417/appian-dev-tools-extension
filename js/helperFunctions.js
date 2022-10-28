@@ -252,3 +252,14 @@ h2.Change Log
 ||Object Type||Object Name||Change List||
 ${renderObjectsArray(rfrData.objectsArray)}{panel}`
 }
+
+function openProcessMonitor () {
+  const urlPath = '/suite/design/monitoring/process-activity'
+  const regex = /https:\/\/.*fisheries\.noaa\.gov|https:\/\/.*\.appiancloud.com/
+  const baseUrl = window.location.origin
+
+  if ( baseUrl.match(regex) ) {
+    let monitorUrl = baseUrl + urlPath
+    window.open(monitorUrl, '_blank')
+  }
+}
