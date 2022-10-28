@@ -85,6 +85,10 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.12
+* Created a Useful Links section in the extension popup
+* Added a link which opens up the environment process monitoring view in a new tab based on the url of the appian environment in the open window
+
 ### Version 3.11
 * Updated the Generate Changelog Entry and Generate Rule Comments context menus to use an asterisk "*" instead of "--" when the ticket type entered is other than "ECO"
 
