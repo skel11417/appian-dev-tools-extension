@@ -263,3 +263,66 @@ function openProcessMonitor () {
     window.open(monitorUrl, '_blank')
   }
 }
+
+// returnSectionArray
+function returnSectionArray() {
+    const releaseNumber = '22.4' // hard-coded for now
+    let sidebar = document.querySelector("#toc");
+    let sidebarArray = Array.from(sidebar.children)
+    let quoteRegex = /("|')/g
+    let output = []
+    sidebarArray.forEach(element => {
+        let sectionLabel = element.firstChild.firstChild.innerText
+        let subElements = element.children[1]
+        // Determine if the section has sub-sections
+        if (subElements) {
+            let subElementsArray = Array.from(subElements.children)
+
+            subElementsArray.forEach(subSection => {
+                if(subSection.children && subSection.children.length > 1 ) {
+                  console.log(subSection)
+
+                  let subSectionLabel = JSON.stringify(subSection.firstChild.innerText.replace(quoteRegex, ""))
+                  let subElementsArray2 = [...subSection.children]
+
+                  subElementsArray2.forEach(subElement2 => {
+                    let enhancementLabel = JSON.stringify(subElement2.firstChild.innerText.replace(quoteRegex, ""))
+                    output.push([releaseNumber, sectionLabel, subSectionLabel, enhancementLabel])
+
+                  })
+
+                }
+                else {
+                  // Use the sub-section heading as the enhancement if the sub-section has
+                  // no sub-sections of its own
+                  let enhancementLabel = JSON.stringify(subSection.firstChild.innerText)
+                  output.push([releaseNumber, sectionLabel, '', enhancementLabel])
+                }
+
+            })
+        } else if (sectionLabel.toLowerCase() === 'resolved general issues') {
+            console.log("Resolved General Issues identified")
+            let generalIssuesArray = [...document.querySelector("#resolved-general-issues").nextElementSibling.children]
+            generalIssuesArray.forEach(element => {
+                let enhancementLabel = JSON.stringify(element.innerText.match(/\n(.+)/)[1].replace(quoteRegex, ""))
+                output.push([releaseNumber, sectionLabel, '', enhancementLabel])
+            })
+        } else {
+            console.log(sectionLabel, " contains enhancements which must be documented manually.")
+            output.push([releaseNumber, sectionLabel, '', "MUST ADD CONTENTS MANUALLY"])
+        }
+    })
+    return output
+}
+
+function generateCSV(rows) {
+    let content = "data:text/csv;charset=utf-8,";
+    rows.forEach(function(row, index) {
+        content += row.join(",") + "\n";
+    });
+    return encodeURI(content);
+}
+
+function downloadCSV() {
+    window.open(generateCSV( returnSectionArray()))
+}
