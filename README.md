@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.13
+* **Replace Native Components with Wrappers**: Added to list of native Appian components that do not have wrappers.
+
 ### Version 3.12
 * Created a Useful Links section in the extension popup
 * Added a link which opens up the environment process monitoring view in a new tab based on the url of the appian environment in the open window
