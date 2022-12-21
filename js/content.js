@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener(function(request){
           // Deployment Information
           applicationName: applicationName,
           buildsRequired: "",
-          pullRequest: "",
+          pullRequest: "###",
           additionalInformation: "",
           // Radio button values
           isUnitTested: "null",
