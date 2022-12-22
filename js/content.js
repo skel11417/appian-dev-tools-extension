@@ -146,6 +146,11 @@ chrome.runtime.onMessage.addListener(function(request){
     openProcessMonitor()
   }
 
+  // Create link to download CSV of 
+  else if (request === 'documentReleaseNotes') {
+    downloadCSV()
+  }
+
   // Execute Code to Load an RFR
   else if (request === 'load') {
     chrome.storage.local.get('test_1', function(result) {

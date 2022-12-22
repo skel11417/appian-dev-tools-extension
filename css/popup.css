@@ -26,3 +26,7 @@
   display: inline;
   font-weight: bold;
 }
+
+#data-extraction {
+  display: none;
+}

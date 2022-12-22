@@ -1,4 +1,6 @@
 // popup.js
+
+// On Page load
 document.addEventListener('DOMContentLoaded', function(){
 
   // Create a new RFR
@@ -18,6 +20,19 @@ document.addEventListener('DOMContentLoaded', function(){
 
   // Load the existing RFR for the app
   // document.querySelector('#btn-load-rfr').addEventListener('click', () => onClick('load'), false)
+
+  
+  chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+    const releaseNotesUrlRegex = /https:\/\/docs\.appian\.com\/suite\/help\/\d{2}\.\d\/Appian_Release_Notes\.html/gm
+    let activeTabUrl = tabs[0].url;
+    let isLocationReleaseNotes = releaseNotesUrlRegex.test(activeTabUrl)
+    
+    // Hide data extraction section if user is not on a page that can be parsed
+    if ( isLocationReleaseNotes ) {
+      document.querySelector('#data-extraction').style.display = 'inline'
+      document.querySelector('#document-release-notes').addEventListener('click', () => onClick('documentReleaseNotes'), false)
+    }
+  });
 
   // Sends a message to open a new tab with the selected message
   function onClick (message) {
