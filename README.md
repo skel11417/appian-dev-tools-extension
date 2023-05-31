@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.14
+* Added useful link which downloads the Appian release notes into a CSV file
+
 ### Version 3.13
 * **Replace Native Components with Wrappers**: Added to list of native Appian components that do not have wrappers.
 
