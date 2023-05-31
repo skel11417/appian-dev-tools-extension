@@ -263,3 +263,71 @@ function openProcessMonitor () {
     window.open(monitorUrl, '_blank')
   }
 }
+
+// returnSectionArray
+function returnSectionArray() {
+    const releaseNumber = '22.4' // hard-coded for now
+    let sectionArray = Array.from(document.querySelector("#toc").children) // the section headings of the release notes
+    let quoteRegex = /("|')/g // regex to find and replace all quotes
+    let outputArray = [] // array returned by the rule
+
+    // Loop through each section to get the section heading and sub-sections
+    sectionArray.forEach(section => {
+        let sectionLabel = section.firstChild.firstChild.innerText
+        let subSectionArray = [...section.children]
+        // Determine if the section has sub-sections (sub-sections are contained in an unordered list element)
+        if (subSectionArray.map(subSection => subSection.tagName).includes('UL')) {
+
+            let sub2ElementsArray = [...subSectionArray[1].children]
+
+            // Loop through each of the children in the unordered list
+            sub2ElementsArray.forEach((sub2Element, index) => {
+                let nextElement = sub2ElementsArray[index + 1] // the element after the current element ()
+
+                // If the current element is an unordered list, then all of the enhancements will be list items
+                if (sub2Element.tagName === 'UL') {
+                    let sub3ElementsArray = Array.from(sub2Element.children)
+                    let subSectionLabel = JSON.stringify(sub2ElementsArray[index - 1].innerText.replace(quoteRegex, ""))
+                    sub3ElementsArray.forEach(sub3Element => {
+                        let enhancementLabel = JSON.stringify(sub3Element.innerText.replace(quoteRegex, ""))
+                        outputArray.push([releaseNumber, sectionLabel, subSectionLabel, enhancementLabel])
+                    })
+                // If the current element is not an unordered list, check to  if the current element is either
+                // the last in the list or if it is followed by another list item. If so, use the sub-section
+                // heading as the enhancement and leave the sub-section column blank
+                } else if (!nextElement || nextElement.tagName === 'LI') {
+                    let enhancementLabel = JSON.stringify(sub2Element.firstChild.innerText.replace(quoteRegex, ""))
+                    outputArray.push([releaseNumber, sectionLabel, '', enhancementLabel])
+                }
+            })
+        // if the section does not contain any sub-sections, check if it is "resolved general issues"
+        } else if (sectionLabel.toLowerCase() === 'resolved general issues') {
+            console.log("Resolved General Issues section has been identified")
+            let generalIssuesArray = [...document.querySelector("#resolved-general-issues").nextElementSibling.children]
+            generalIssuesArray.forEach(element => {
+                let enhancementLabel = JSON.stringify(element.innerText.match(/\n(.+)/)[1].replace(quoteRegex, ""))
+                outputArray.push([releaseNumber, sectionLabel, '', enhancementLabel])
+            })
+        // Else add row with section heading and note that the contents but be evaluated manually
+        } else {
+            console.log(sectionLabel, " contains enhancements which must be documented manually.")
+            outputArray.push([releaseNumber, sectionLabel, '', "MUST ADD CONTENTS MANUALLY"])
+        }
+    })
+    // Return the array
+    return outputArray
+}
+
+// generateCSV
+function generateCSV(rows) {
+    let content = "data:text/csv;charset=utf-8,";
+    rows.forEach(function(row, index) {
+        content += row.join(",") + "\n";
+    });
+    return encodeURI(content);
+}
+
+// downloadCSV
+function downloadCSV() {
+    window.open(generateCSV(returnSectionArray()))
+}

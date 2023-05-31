@@ -33,7 +33,7 @@ chrome.runtime.onMessage.addListener(function(request){
           // Deployment Information
           applicationName: applicationName,
           buildsRequired: "",
-          pullRequest: "",
+          pullRequest: "###",
           additionalInformation: "",
           // Radio button values
           isUnitTested: "null",
@@ -144,6 +144,11 @@ chrome.runtime.onMessage.addListener(function(request){
   // Open the process monitoring for the current environment
   else if (request === 'openProcessMonitor') {
     openProcessMonitor()
+  }
+
+  // Create link to download CSV of 
+  else if (request === 'documentReleaseNotes') {
+    downloadCSV()
   }
 
   // Execute Code to Load an RFR
