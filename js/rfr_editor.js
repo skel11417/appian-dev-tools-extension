@@ -137,9 +137,28 @@ function createObjectTableRow (object) {
 // copyToClipboard
 function copyToClipboard(event) {
   event.preventDefault()
-  let textToCopy = document.querySelector('#markdown-text-area')
-  textToCopy.select()
-  document.execCommand("copy")
+
+  // 'https://dev.to/stegriff/copy-rich-html-with-the-native-clipboard-api-5ah8'
+  // ABSTRACT THIS TO SEPARATE RULE
+  const rfrData = getValuesFromRFRTemplate();
+  document.querySelector('#developer-template').innerText = rfrData.developerNames;
+  document.querySelector("#heading-template").innerText = "Ready For Review: " + rfrData.applicationName;
+  document.querySelector("#functional-solution-template").innerText = rfrData.functionalSolution;
+  document.querySelector("#technical-solution-template").innerText = rfrData.technicalSolution;
+  document.querySelector("#testing-considerations-template").innerText = rfrData.testingConsiderations;
+  document.querySelector("#application-name-template").innerHTML = `<a href=${rfrData.applicationLink}>${rfrData.applicationName}</a>`;
+  document.querySelector("#builds-required-template").innerText = "Builds Required: ".concat(rfrData.buildsRequired ? rfrData.buildsRequired : "None")  
+
+  try {
+    const content = document.getElementById('clipboard-template').outerHTML;
+    const blobInput = new Blob([content], {type: 'text/html'});
+    const clipboardItemInput = new ClipboardItem({'text/html' : blobInput});
+    navigator.clipboard.write([clipboardItemInput]);
+  } catch(e) {
+    // Handle error with user feedback - "Copy failed!" kind of thing
+    console.log(e);
+  }
+
 }
 
 // onGenerateMarkdown
@@ -199,7 +218,7 @@ function onMessageHandler (message) {
 
   // Add event listener to submit button
   document.querySelector("#submit").addEventListener("click",
-    onGenerateMarkdown
+    copyToClipboard
   )
 }
 
