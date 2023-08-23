@@ -115,6 +115,7 @@
         <input id="submit" type="submit" value="Copy to Clipboard" class="button">
       </div>
     </form>
+    <!-- Hidden template used for generating blob of rich text that goes into clipboard -->
     <div hidden>
       <div id="clipboard-template"
         class="ak-editor-content-area less-margin css-1jql0uu"
@@ -253,7 +254,7 @@
                           <li><p id="application-name-template"></p></li>
                           <li><p id="builds-required-template"></p></li>
                           <li><p>Pull Request: ###</p></li>
-                          <li><p>Additional Information: N/A</p></li>
+                          <li><p id="additional-information-template"></p></li>
                         </ul>
                       </td>
                     </tr>
