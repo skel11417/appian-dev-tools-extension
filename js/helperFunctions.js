@@ -266,58 +266,66 @@ function openProcessMonitor () {
 
 // returnSectionArray
 function returnSectionArray() {
-    const releaseNumber = '22.4' // hard-coded for now
-    let sectionArray = Array.from(document.querySelector("#toc").children) // the section headings of the release notes
-    let quoteRegex = /("|')/g // regex to find and replace all quotes
-    let outputArray = [] // array returned by the rule
+  const releaseRegex = /\d{2}\.\d/g
+  const listRegex = /\s-\s(.+)/g
+  const quoteRegex = /("|')/g // regex to find and replace all quotes
+  const selector = "body > div.page_layout > div.page_main > div.page_content"
+  const lastElementChild = document.querySelector(selector).lastElementChild
+  const releaseNumber = document.URL.match(releaseRegex)[0]; // hard-coded for now
+  const sectionArray = Array.from(document.getElementsByTagName('h2'));
 
-    // Loop through each section to get the section heading and sub-sections
-    sectionArray.forEach(section => {
-        let sectionLabel = section.firstChild.firstChild.innerText
-        let subSectionArray = [...section.children]
-        // Determine if the section has sub-sections (sub-sections are contained in an unordered list element)
-        if (subSectionArray.map(subSection => subSection.tagName).includes('UL')) {
+  let outputArray = [] // array returned by the rule
 
-            let sub2ElementsArray = [...subSectionArray[1].children]
-
-            // Loop through each of the children in the unordered list
-            sub2ElementsArray.forEach((sub2Element, index) => {
-                let nextElement = sub2ElementsArray[index + 1] // the element after the current element ()
-
-                // If the current element is an unordered list, then all of the enhancements will be list items
-                if (sub2Element.tagName === 'UL') {
-                    let sub3ElementsArray = Array.from(sub2Element.children)
-                    let subSectionLabel = JSON.stringify(sub2ElementsArray[index - 1].innerText.replace(quoteRegex, ""))
-                    sub3ElementsArray.forEach(sub3Element => {
-                        let enhancementLabel = JSON.stringify(sub3Element.innerText.replace(quoteRegex, ""))
-                        outputArray.push([releaseNumber, sectionLabel, subSectionLabel, enhancementLabel])
-                    })
-                // If the current element is not an unordered list, check to  if the current element is either
-                // the last in the list or if it is followed by another list item. If so, use the sub-section
-                // heading as the enhancement and leave the sub-section column blank
-                } else if (!nextElement || nextElement.tagName === 'LI') {
-                    let enhancementLabel = JSON.stringify(sub2Element.firstChild.innerText.replace(quoteRegex, ""))
-                    outputArray.push([releaseNumber, sectionLabel, '', enhancementLabel])
-                }
-            })
-        // if the section does not contain any sub-sections, check if it is "resolved general issues"
-        } else if (sectionLabel.toLowerCase() === 'resolved general issues') {
-            console.log("Resolved General Issues section has been identified")
-            let generalIssuesArray = [...document.querySelector("#resolved-general-issues").nextElementSibling.children]
-            generalIssuesArray.forEach(element => {
-                let enhancementLabel = JSON.stringify(element.innerText.match(/\n(.+)/)[1].replace(quoteRegex, ""))
-                outputArray.push([releaseNumber, sectionLabel, '', enhancementLabel])
-            })
-        // Else add row with section heading and note that the contents but be evaluated manually
+  sectionArray.forEach(section => {
+    let sectionLabel = section.innerText
+    let subSectionElement = section.nextElementSibling;
+    let hasSubsections = false;
+    console.log(sectionLabel)
+    // Loop through all siblings until the end of the list or the next h2 section
+    while( subSectionElement !== lastElementChild && subSectionElement.tagName !== 'H2') {
+      // Section contains h3 subsection
+      if (subSectionElement.tagName === 'H3') {
+        hasSubsections = true
+        let subSectionLabel = subSectionElement.innerText
+        console.log(subSectionLabel)
+        let hasEnhancements = subSectionElement.nextElementSibling.nextElementSibling.tagName === 'H4' // must improve on this rule
+        let sub2Element = subSectionElement.nextElementSibling.nextElementSibling
+        if (hasEnhancements) {
+          while ( sub2Element !== undefined && sub2Element.tagName !== 'H3' && sub2Element.tagName !== 'H2') {
+            if (sub2Element.tagName === 'H4') {
+              let enhancementText = sub2Element.innerText
+              outputArray.push([releaseNumber, sectionLabel, subSectionLabel, enhancementText])
+            }
+            sub2Element = sub2Element.nextElementSibling
+          }
         } else {
-            console.log(sectionLabel, " contains enhancements which must be documented manually.")
-            outputArray.push([releaseNumber, sectionLabel, '', "MUST ADD CONTENTS MANUALLY"])
+          outputArray.push([releaseNumber, sectionLabel, ' ', subSectionLabel])
         }
-    })
-    // Return the array
-    return outputArray
+      // Section contains an unordered list
+    } else if (subSectionElement.tagName === 'UL') {
+      hasSubsections = true
+      let list = Array.from(subSectionElement.children)
+      // Process List
+      list.forEach(listItem => {
+        // console.log(listItem.innerText.match(/\s-\s(.*)/))
+        let match = listItem.innerText.match(/\s-\s([\s\S]*)/)
+        if (match){
+          let enhancementText = match[1].replace(/[\r\n]+/gm, "")
+          outputArray.push([releaseNumber, sectionLabel, '', enhancementText])
+        }
+      })
+    }
+      // Advance to next element on page
+      subSectionElement = subSectionElement.nextElementSibling
+    }
+    // If loop has completed without finding subsections, then there are none
+    if (!hasSubsections) {
+      let enhancementText = JSON.stringify(section.nextElementSibling.innerText.replace(quoteRegex, ""))
+      outputArray.push([releaseNumber, sectionLabel, '', enhancementText])
+    }
+  })
+  return outputArray
 }
-
 // generateCSV
 function generateCSV(rows) {
     let content = "data:text/csv;charset=utf-8,";
