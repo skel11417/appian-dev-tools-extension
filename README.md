@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.15
+* **Document Release Notes** made the function less prone to issues due to formatting changes on the release notes page
+
 ### Version 3.14
 * Added useful link which downloads the Appian release notes into a CSV file
 
