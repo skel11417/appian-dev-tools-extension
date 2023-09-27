@@ -17,7 +17,7 @@ function convertToOrFromIndexFunction() {
     // Else get field name and return index notation
     console.log(textString.match(dotNotationFieldNameRegex))
     let fieldName = textString.match(dotNotationFieldNameRegex)[2]
-    return `index(${variableName}, "${fieldName}", {})`
+    return `index(${variableName}, "${fieldName}", null)`
   }
 }
 

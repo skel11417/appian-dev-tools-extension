@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 3.16
+* Configured "Convert to index()" function to use null as the default instead of an empty list, which is technically an illegal value
+
 ### Version 3.15
 * **Document Release Notes** made the function less prone to issues due to formatting changes on the release notes page
 
