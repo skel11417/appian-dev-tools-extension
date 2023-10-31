@@ -134,6 +134,22 @@ function createObjectTableRow (object) {
   changeListCell.innerText = object.changeList;
 }
 
+// generateHtmlTableRow
+function generateHtmlTableRow (object) {
+  // {objectType: objectType, objectName: objectName, objectLink: objectLink, changeList: ""}
+  let table = document.getElementById("template-object-table");
+  let row = table.insertRow(-1);
+  row.classList.add("object-row");
+  let objectTypeCell = row.insertCell(0);
+  let objectNameCell = row.insertCell(1);
+  let changeListCell = row.insertCell(2);
+  changeListCell.contentEditable = "true"
+  objectTypeCell.innerText = object.objectType;
+  // make input
+  objectNameCell.innerText = object.objectName;
+  // make text area
+  changeListCell.innerText = formatChangeList(object.changeList);
+}
 
 // copyToClipboard
 function copyToClipboard(event) {
@@ -149,7 +165,9 @@ function copyToClipboard(event) {
   document.querySelector("#application-name-template").innerHTML = `<a href=${rfrData.applicationLink}>${rfrData.applicationName}</a>`;
   document.querySelector("#builds-required-template").innerText = "Builds Required: ".concat(rfrData.buildsRequired ? rfrData.buildsRequired : "None")
   document.querySelector("#additional-information-template").innerText = "Additional Information: ".concat(rfrData.additionalInformation ? rfrData.additionalInformation : "N/A")
-
+  // Sort Objects Array
+  sortedObjectsArray = sortObjects(rfrData.objectsArray)
+  sortedObjectsArray.forEach(object => generateHtmlTableRow(object))
 
   // Render table
 
