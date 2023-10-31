@@ -134,12 +134,78 @@ function createObjectTableRow (object) {
   changeListCell.innerText = object.changeList;
 }
 
+// generateHtmlTableRow
+function generateHtmlTableRow (object) {
+  // {objectType: objectType, objectName: objectName, objectLink: objectLink, changeList: ""}
+  let table = document.getElementById("template-object-table");
+  let row = table.insertRow(-1);
+  row.classList.add("object-row");
+  let objectTypeCell = row.insertCell(0);
+  let objectNameCell = row.insertCell(1);
+  let changeListCell = row.insertCell(2);
+  changeListCell.contentEditable = "true"
+  objectTypeCell.innerText = object.objectType;
+  // make input
+  objectNameCell.innerText = object.objectName;
+  // make text area
+  changeListCell.innerText = formatChangeList(object.changeList);
+}
+
+// renderChecklistItem
+function renderChecklistItem (checklistItem) {
+  const checkmarkHtml = '<img loading="lazy" src="https://pf-emoji-service--cdn.us-east-1.prod.public.atl-paas.net/atlassian/check_mark_64.png" alt=":check_mark:" data-emoji-short-name=":check_mark:" data-emoji-id="atlassian-check_mark" data-emoji-text=":check_mark:" class="emoji" width="20" height="20" style="visibility: visible;" />'
+  const xHtml = '<img loading="lazy" src="https://pf-emoji-service--cdn.us-east-1.prod.public.atl-paas.net/atlassian/cross_mark_64.png" alt=":cross_mark:" data-emoji-short-name=":cross_mark:" data-emoji-id="atlassian-cross_mark" data-emoji-text=":cross_mark:" class="emoji" width="20" height="20" style="visibility: visible;">'
+  switch (checklistItem) {
+    case "true":
+      return checkmarkHtml
+    case "false":
+      return xHtml
+    case "null":
+      return "(N/A)"
+    default:
+      return "(N/A)"
+  }
+}
+
 // copyToClipboard
 function copyToClipboard(event) {
   event.preventDefault()
-  let textToCopy = document.querySelector('#markdown-text-area')
-  textToCopy.select()
-  document.execCommand("copy")
+
+  // ABSTRACT THIS TO SEPARATE RULE
+  const rfrData = getValuesFromRFRTemplate();
+  document.querySelector('#developer-template').innerText = rfrData.developerNames;
+  document.querySelector("#heading-template").innerHTML = "<b>Ready For Review: " + rfrData.applicationName + "</b>";
+  document.querySelector("#functional-solution-template").innerText = rfrData.functionalSolution;
+  document.querySelector("#technical-solution-template").innerText = rfrData.technicalSolution;
+  document.querySelector("#testing-considerations-template").innerText = rfrData.testingConsiderations;
+  document.querySelector("#application-name-template").innerHTML = `<a href=${rfrData.applicationLink}>${rfrData.applicationName}</a>`;
+  document.querySelector("#builds-required-template").innerText = "Builds Required: ".concat(rfrData.buildsRequired ? rfrData.buildsRequired : "None")
+  document.querySelector("#additional-information-template").innerText = "Additional Information: ".concat(rfrData.additionalInformation ? rfrData.additionalInformation : "N/A")
+  
+  console.log(rfrData.isUnitTested === true);
+  document.querySelector("#template-unit-tested").innerHTML = renderChecklistItem(rfrData.isUnitTested)
+  document.querySelector("#template-test-case").innerHTML = renderChecklistItem(rfrData.isTestCaseCreated)
+  document.querySelector("#template-broken-instances").innerHTML = renderChecklistItem(rfrData.isBrokenInstancesDeleted)
+  document.querySelector("#template-reference-data").innerHTML = renderChecklistItem(rfrData.isReferenceDataHelperUpdated)
+  document.querySelector("#template-dictionary-updated").innerHTML = renderChecklistItem(rfrData.isDataDictionaryUpdated)
+
+  // Sort Objects Array
+  sortedObjectsArray = sortObjects(rfrData.objectsArray)
+  sortedObjectsArray.forEach(object => generateHtmlTableRow(object))
+
+  // Render table
+
+  // 'https://dev.to/stegriff/copy-rich-html-with-the-native-clipboard-api-5ah8'
+  try {
+    const content = document.getElementById('clipboard-template').outerHTML;
+    const blobInput = new Blob([content], {type: 'text/html'});
+    const clipboardItemInput = new ClipboardItem({'text/html' : blobInput});
+    navigator.clipboard.write([clipboardItemInput]);
+  } catch(e) {
+    // Handle error with user feedback - "Copy failed!" kind of thing
+    console.log(e);
+  }
+
 }
 
 // onGenerateMarkdown
@@ -199,7 +265,7 @@ function onMessageHandler (message) {
 
   // Add event listener to submit button
   document.querySelector("#submit").addEventListener("click",
-    onGenerateMarkdown
+    copyToClipboard
   )
 }
 
