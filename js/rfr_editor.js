@@ -151,6 +151,22 @@ function generateHtmlTableRow (object) {
   changeListCell.innerText = formatChangeList(object.changeList);
 }
 
+// renderChecklistItem
+function renderChecklistItem (checklistItem) {
+  const checkmarkHtml = '<img loading="lazy" src="https://pf-emoji-service--cdn.us-east-1.prod.public.atl-paas.net/atlassian/check_mark_64.png" alt=":check_mark:" data-emoji-short-name=":check_mark:" data-emoji-id="atlassian-check_mark" data-emoji-text=":check_mark:" class="emoji" width="20" height="20" style="visibility: visible;" />'
+  const xHtml = '<img loading="lazy" src="https://pf-emoji-service--cdn.us-east-1.prod.public.atl-paas.net/atlassian/cross_mark_64.png" alt=":cross_mark:" data-emoji-short-name=":cross_mark:" data-emoji-id="atlassian-cross_mark" data-emoji-text=":cross_mark:" class="emoji" width="20" height="20" style="visibility: visible;">'
+  switch (checklistItem) {
+    case "true":
+      return checkmarkHtml
+    case "false":
+      return xHtml
+    case "null":
+      return "(N/A)"
+    default:
+      return "(N/A)"
+  }
+}
+
 // copyToClipboard
 function copyToClipboard(event) {
   event.preventDefault()
@@ -165,6 +181,14 @@ function copyToClipboard(event) {
   document.querySelector("#application-name-template").innerHTML = `<a href=${rfrData.applicationLink}>${rfrData.applicationName}</a>`;
   document.querySelector("#builds-required-template").innerText = "Builds Required: ".concat(rfrData.buildsRequired ? rfrData.buildsRequired : "None")
   document.querySelector("#additional-information-template").innerText = "Additional Information: ".concat(rfrData.additionalInformation ? rfrData.additionalInformation : "N/A")
+  
+  console.log(rfrData.isUnitTested === true);
+  document.querySelector("#template-unit-tested").innerHTML = renderChecklistItem(rfrData.isUnitTested)
+  document.querySelector("#template-test-case").innerHTML = renderChecklistItem(rfrData.isTestCaseCreated)
+  document.querySelector("#template-broken-instances").innerHTML = renderChecklistItem(rfrData.isBrokenInstancesDeleted)
+  document.querySelector("#template-reference-data").innerHTML = renderChecklistItem(rfrData.isReferenceDataHelperUpdated)
+  document.querySelector("#template-dictionary-updated").innerHTML = renderChecklistItem(rfrData.isDataDictionaryUpdated)
+
   // Sort Objects Array
   sortedObjectsArray = sortObjects(rfrData.objectsArray)
   sortedObjectsArray.forEach(object => generateHtmlTableRow(object))
