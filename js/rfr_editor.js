@@ -134,6 +134,7 @@ function createObjectTableRow (object) {
   changeListCell.innerText = object.changeList;
 }
 
+
 // copyToClipboard
 function copyToClipboard(event) {
   event.preventDefault()
@@ -141,7 +142,7 @@ function copyToClipboard(event) {
   // ABSTRACT THIS TO SEPARATE RULE
   const rfrData = getValuesFromRFRTemplate();
   document.querySelector('#developer-template').innerText = rfrData.developerNames;
-  document.querySelector("#heading-template").innerText = "Ready For Review: " + rfrData.applicationName;
+  document.querySelector("#heading-template").innerHTML = "<b>Ready For Review: " + rfrData.applicationName + "</b>";
   document.querySelector("#functional-solution-template").innerText = rfrData.functionalSolution;
   document.querySelector("#technical-solution-template").innerText = rfrData.technicalSolution;
   document.querySelector("#testing-considerations-template").innerText = rfrData.testingConsiderations;
