@@ -18,9 +18,6 @@ chrome.storage.local.get('developerName', function (result) {
     })
   }
 
-  // generateRuleComments
-  let ruleName = getRuleName()
-
   let ticket = window.prompt(
     "Ticket number for this object",
     // default response
@@ -32,16 +29,7 @@ chrome.storage.local.get('developerName', function (result) {
 
   /* Paste rule comments */
   document.activeElement.value=
-  `/*
-  ${ruleName}(
-
-  )
-*/
-
-
-
-
-/*
+`/*
 ////////////////////////////// CHANGE LOG \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
 <${date}><${ticket}><${developerName}>
