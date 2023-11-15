@@ -178,7 +178,7 @@ function copyToClipboard(event) {
   document.querySelector("#functional-solution-template").innerText = rfrData.functionalSolution;
   document.querySelector("#technical-solution-template").innerText = rfrData.technicalSolution;
   document.querySelector("#testing-considerations-template").innerText = rfrData.testingConsiderations;
-  document.querySelector("#application-name-template").innerHTML = `<a href=${rfrData.applicationLink}>${rfrData.applicationName}</a>`;
+  document.querySelector("#application-name-template").innerHTML = `Application: <a href=${rfrData.applicationLink}>${rfrData.applicationName}</a>`;
   document.querySelector("#builds-required-template").innerText = "Builds Required: ".concat(rfrData.buildsRequired ? rfrData.buildsRequired : "None")
   document.querySelector("#additional-information-template").innerText = "Additional Information: ".concat(rfrData.additionalInformation ? rfrData.additionalInformation : "N/A")
   
