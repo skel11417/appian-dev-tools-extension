@@ -85,6 +85,10 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 4.0
+* **Updated RFR Template generator**: Since Jira no longer supports markdown, I modified the RFR Editor to render the form data to formatted rich text which can be copied to the clipboard by clicking "Copy to Clipboard" at the bottom of the page.
+* Removed header from documentation produced from Generate Rule Comments context menu
+
 ### Version 3.16
 * Configured "Convert to index()" function to use null as the default instead of an empty list, which is technically an illegal value
 
