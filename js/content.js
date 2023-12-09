@@ -146,6 +146,16 @@ chrome.runtime.onMessage.addListener(function(request){
     openProcessMonitor()
   }
 
+  // Open a link to create a new rule
+  else if (request === 'createNewRule') {
+    createNewRule()
+  }
+
+  // Open link to create a new interface
+  else if (request === 'createNewInterface') {
+    createNewInterface()
+  }
+
   // Create link to download CSV of 
   else if (request === 'documentReleaseNotes') {
     downloadCSV()

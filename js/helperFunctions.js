@@ -253,15 +253,38 @@ h2.Change Log
 ${renderObjectsArray(rfrData.objectsArray)}{panel}`
 }
 
-function openProcessMonitor () {
-  const urlPath = '/suite/design/monitoring/process-activity'
-  const regex = /https:\/\/.*fisheries\.noaa\.gov|https:\/\/.*\.appiancloud.com/
-  const baseUrl = window.location.origin
+// getBaseUrlOfAppianInstance
+function getBaseUrlOfOpenWindow () {
+  return window.location.origin
+}
 
-  if ( baseUrl.match(regex) ) {
+function isUrlAppianInstance (baseUrl) {
+  const regex = /https:\/\/.*fisheries\.noaa\.gov|https:\/\/.*\.appiancloud.com/
+  return baseUrl.match(regex)
+}
+
+function openNewTabForAppianSite (urlPath) {
+  const baseUrl = getBaseUrlOfOpenWindow();
+  // Open url if it exists
+  if ( isUrlAppianInstance(baseUrl) ) {
     let monitorUrl = baseUrl + urlPath
     window.open(monitorUrl, '_blank')
   }
+}
+
+// openProcessMonitor
+function openProcessMonitor () {
+  openNewTabForAppianSite('/suite/design/monitoring/process-activity')
+}
+
+// createNewRule
+function createNewRule () {
+  openNewTabForAppianSite('/suite/design/rule')
+}
+
+// createNewInterface
+function createNewInterface () {
+  openNewTabForAppianSite('/suite/design/interface')
 }
 
 // returnSectionArray
@@ -310,7 +333,7 @@ function returnSectionArray() {
         // console.log(listItem.innerText.match(/\s-\s(.*)/))
         let match = listItem.innerText.match(/\s-\s([\s\S]*)/)
         if (match){
-          let enhancementText = match[1].replace(/[\r\n]+/gm, "")
+          let enhancementText = '"' + match[1].replace(/[\r\n]+/gm, "") + '"'
           outputArray.push([releaseNumber, sectionLabel, '', enhancementText])
         }
       })

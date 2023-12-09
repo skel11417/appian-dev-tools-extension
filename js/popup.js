@@ -18,6 +18,13 @@ document.addEventListener('DOMContentLoaded', function(){
   // Open process monitoring for the current environment
   document.querySelector('#open-environment-process-monitoring').addEventListener('click', () => onClick('openProcessMonitor'), false)
 
+  // Create a new blank rule
+  document.querySelector('#new-rule-link').addEventListener('click', () => onClick('createNewRule'), false)
+
+  // Create a new blank interface
+  document.querySelector('#new-interface-link').addEventListener('click', () => onClick('createNewInterface'), false)
+
+
   // Load the existing RFR for the app
   // document.querySelector('#btn-load-rfr').addEventListener('click', () => onClick('load'), false)
 
