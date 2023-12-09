@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 4.1
+* **Useful Links**: Added *Create New Rule* and *Create New Interface* links to open a blank rule/interface in a new tab
+
 ### Version 4.0
 * **Updated RFR Template generator**: Since Jira no longer supports markdown, I modified the RFR Editor to render the form data to formatted rich text which can be copied to the clipboard by clicking "Copy to Clipboard" at the bottom of the page.
 * Removed header from documentation produced from Generate Rule Comments context menu
