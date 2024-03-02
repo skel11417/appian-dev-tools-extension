@@ -289,15 +289,17 @@ function createNewInterface () {
 
 // returnSectionArray
 function returnSectionArray() {
+  let outputArray = [] // array returned by the rule
   const releaseRegex = /\d{2}\.\d/g
-  const listRegex = /\s-\s(.+)/g
   const quoteRegex = /("|')/g // regex to find and replace all quotes
   const selector = "body > div.page_layout > div.page_main > div.page_content"
   const lastElementChild = document.querySelector(selector).lastElementChild
   const releaseNumber = document.URL.match(releaseRegex)[0]; // hard-coded for now
   const sectionArray = Array.from(document.getElementsByTagName('h2'));
 
-  let outputArray = [] // array returned by the rule
+  // Remove Header Links
+  let headerLinks =  document.getElementsByClassName('header-link-wrapper');
+  Array.from(headerLinks).forEach(headerLink => headerLink.innerHTML = '');
 
   sectionArray.forEach(section => {
     let sectionLabel = section.innerText
