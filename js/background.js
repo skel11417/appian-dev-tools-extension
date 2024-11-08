@@ -7,7 +7,7 @@ contextMenus.generateRuleComments =
     {
       "title": "Generate Rule Comments",
       "contexts": ["editable","page"],
-      "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+      "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
     },
     function(){
       if(chrome.runtime.lastError){
@@ -22,7 +22,7 @@ contextMenus.generateRuleComments =
       {
         "title": "Generate Changelog Entry",
         "contexts": ["editable","page"],
-        "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+        "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
       },
       function(){
         if(chrome.runtime.lastError){
@@ -37,7 +37,7 @@ contextMenus.generateRuleComments =
         {
           "title": "Replace Native Components with Wrappers",
           "contexts": ["selection"],
-          "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+          "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
         },
         function(){
           if(chrome.runtime.lastError){
@@ -52,7 +52,7 @@ contextMenus.generateRuleComments =
         {
           "title": "Convert to/from index function",
           "contexts": ["selection"],
-          "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+          "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
         },
         function(){
           if(chrome.runtime.lastError){
@@ -67,7 +67,7 @@ contextMenus.generateRuleComments =
         {
           "title": "Insert Debug Text Field Component",
           "contexts": ["editable","page"],
-          "documentUrlPatterns": ["https://*.appiancloud.com/suite/design/*"]
+          "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
         },
         function(){
           if(chrome.runtime.lastError){

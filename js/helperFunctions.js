@@ -259,7 +259,7 @@ function getBaseUrlOfOpenWindow () {
 }
 
 function isUrlAppianInstance (baseUrl) {
-  const regex = /https:\/\/.*fisheries\.noaa\.gov|https:\/\/.*\.appiancloud.com/
+  const regex = /https:\/\/.*fisheries\.noaa\.gov|https:\/\/.*\.appiancloud.us/
   return baseUrl.match(regex)
 }
 
