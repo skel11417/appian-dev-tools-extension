@@ -290,31 +290,37 @@ function createNewInterface () {
 // returnSectionArray
 function returnSectionArray() {
   let outputArray = [] // array returned by the rule
-  const releaseRegex = /\d{2}\.\d/g
+  const releaseRegex = /\d{2}\.\d/g // Regex to get the release number
   const quoteRegex = /("|')/g // regex to find and replace all quotes
-  const selector = "body > div.page_layout > div.page_main > div.page_content"
-  const lastElementChild = document.querySelector(selector).lastElementChild
   const releaseNumber = document.URL.match(releaseRegex)[0]; // hard-coded for now
-  const sectionArray = Array.from(document.getElementsByTagName('h2'));
 
   // Remove Header Links
-  let headerLinks =  document.getElementsByClassName('header-link-wrapper');
+  const headerLinks =  document.getElementsByClassName('header-link-wrapper');
   Array.from(headerLinks).forEach(headerLink => headerLink.innerHTML = '');
 
+  const sectionArray = Array.from(document.getElementsByTagName('h2'));
+  // Remove first and last elements in section Array
+  sectionArray.shift();
+  sectionArray.pop();
+
+  // Loop through each section and create as many rows as needed
   sectionArray.forEach(section => {
     let sectionLabel = section.innerText
-    let subSectionElement = section.nextElementSibling;
-    let hasSubsections = false;
-    console.log(sectionLabel)
+    let subSectionElement = section.nextElementSibling; // Start looping through siblings
+    let hasSubsections = false; // Default to false
+
+    console.log(sectionLabel);
+
     // Loop through all siblings until the end of the list or the next h2 section
-    while( subSectionElement !== lastElementChild && subSectionElement.tagName !== 'H2') {
+    while( //subSectionElement !== lastElementChild &&
+       subSectionElement.tagName !== 'H2') {
       // Section contains h3 subsection
       if (subSectionElement.tagName === 'H3') {
         hasSubsections = true
         let subSectionLabel = subSectionElement.innerText
-        console.log(subSectionLabel)
         let hasEnhancements = subSectionElement.nextElementSibling.nextElementSibling.tagName === 'H4' // must improve on this rule
         let sub2Element = subSectionElement.nextElementSibling.nextElementSibling
+        console.log(subSectionLabel);
         if (hasEnhancements) {
           while ( sub2Element !== undefined && sub2Element.tagName !== 'H3' && sub2Element.tagName !== 'H2') {
             if (sub2Element.tagName === 'H4') {
@@ -332,10 +338,10 @@ function returnSectionArray() {
       let list = Array.from(subSectionElement.children)
       // Process List
       list.forEach(listItem => {
-        // console.log(listItem.innerText.match(/\s-\s(.*)/))
-        let match = listItem.innerText.match(/\s-\s([\s\S]*)/)
+        let match = listItem.innerText.match(/(?:Low|Medium|High)\n([\s\S]*)/)
         if (match){
-          let enhancementText = '"' + match[1].replace(/[\r\n]+/gm, "") + '"'
+          let enhancementText = match[1];
+          // Add to output array
           outputArray.push([releaseNumber, sectionLabel, '', enhancementText])
         }
       })
@@ -346,6 +352,7 @@ function returnSectionArray() {
     // If loop has completed without finding subsections, then there are none
     if (!hasSubsections) {
       let enhancementText = JSON.stringify(section.nextElementSibling.innerText.replace(quoteRegex, ""))
+      // Add to output array
       outputArray.push([releaseNumber, sectionLabel, '', enhancementText])
     }
   })
