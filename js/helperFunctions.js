@@ -289,74 +289,100 @@ function createNewInterface () {
 
 // returnSectionArray
 function returnSectionArray() {
-  let outputArray = [] // array returned by the rule
-  const releaseRegex = /\d{2}\.\d/g // Regex to get the release number
-  const quoteRegex = /("|')/g // regex to find and replace all quotes
+  let outputArray = []; // array returned by the rule
+  const quoteRegex = /("|')/g; // regex to find and replace all quotes
+
+  // Get release number
+  const releaseRegex = /\d{2}\.\d/g; // Regex to get the release number
   const releaseNumber = document.URL.match(releaseRegex)[0]; // hard-coded for now
 
   // Remove Header Links
-  const headerLinks =  document.getElementsByClassName('header-link-wrapper');
-  Array.from(headerLinks).forEach(headerLink => headerLink.innerHTML = '');
+  const headerLinks = document.getElementsByClassName("header-link-wrapper");
+  Array.from(headerLinks).forEach((headerLink) => (headerLink.innerHTML = ""));
 
-  const sectionArray = Array.from(document.getElementsByTagName('h2'));
+  // Get main sections and remove unnecessary
+  const sectionArray = Array.from(document.getElementsByTagName("h2"));
+
   // Remove first and last elements in section Array
   sectionArray.shift();
   sectionArray.pop();
 
   // Loop through each section and create as many rows as needed
-  sectionArray.forEach(section => {
-    let sectionLabel = section.innerText
+  sectionArray.forEach((section) => {
+    let sectionLabel = section.innerText;
     let subSectionElement = section.nextElementSibling; // Start looping through siblings
     let hasSubsections = false; // Default to false
 
     console.log(sectionLabel);
 
     // Loop through all siblings until the end of the list or the next h2 section
-    while( //subSectionElement !== lastElementChild &&
-       subSectionElement.tagName !== 'H2') {
+    while (subSectionElement.tagName !== "H2") {
       // Section contains h3 subsection
-      if (subSectionElement.tagName === 'H3') {
-        hasSubsections = true
-        let subSectionLabel = subSectionElement.innerText
-        let hasEnhancements = subSectionElement.nextElementSibling.nextElementSibling.tagName === 'H4' // must improve on this rule
-        let sub2Element = subSectionElement.nextElementSibling.nextElementSibling
+      if (subSectionElement.tagName === "H3") {
+        hasSubsections = true;
+        let subSectionLabel = subSectionElement.innerText;
+        let hasEnhancements =
+          subSectionElement.nextElementSibling.nextElementSibling.tagName ===
+          "H4"; // must improve on this rule
+        let sub2Element =
+          subSectionElement.nextElementSibling.nextElementSibling;
         console.log(subSectionLabel);
         if (hasEnhancements) {
-          while ( sub2Element !== undefined && sub2Element.tagName !== 'H3' && sub2Element.tagName !== 'H2') {
-            if (sub2Element.tagName === 'H4') {
-              let enhancementText = sub2Element.innerText
-              outputArray.push([releaseNumber, sectionLabel, subSectionLabel, enhancementText])
+          while (
+            sub2Element !== undefined &&
+            sub2Element.tagName !== "H3" &&
+            sub2Element.tagName !== "H2"
+          ) {
+            if (sub2Element.tagName === "H4") {
+              let enhancementText = sub2Element.innerText;
+              // Add to output Array
+              outputArray.push([
+                releaseNumber,
+                sectionLabel,
+                subSectionLabel,
+                enhancementText,
+              ]);
             }
-            sub2Element = sub2Element.nextElementSibling
+            sub2Element = sub2Element.nextElementSibling;
           }
         } else {
-          outputArray.push([releaseNumber, sectionLabel, ' ', subSectionLabel])
+          // Add to output Array
+          outputArray.push([releaseNumber, sectionLabel, " ", subSectionLabel]);
         }
-      // Section contains an unordered list
-    } else if (subSectionElement.tagName === 'UL') {
-      hasSubsections = true
-      let list = Array.from(subSectionElement.children)
-      // Process List
-      list.forEach(listItem => {
-        let match = listItem.innerText.match(/(?:Low|Medium|High)\n([\s\S]*)/)
-        if (match){
-          let enhancementText = match[1];
-          // Add to output array
-          outputArray.push([releaseNumber, sectionLabel, '', enhancementText])
-        }
-      })
-    }
+        // Section contains an unordered list
+      } else if (subSectionElement.tagName === "UL") {
+        hasSubsections = true;
+        let list = Array.from(subSectionElement.children);
+        // Process List
+        list.forEach((listItem) => {
+          let match = listItem.innerText.match(
+            /(?:Low|Medium|High)\n([\s\S]*)/
+          );
+          if (match) {
+            let enhancementText = match[1];
+            // Add to output array
+            outputArray.push([
+              releaseNumber,
+              sectionLabel,
+              "",
+              enhancementText,
+            ]);
+          }
+        });
+      }
       // Advance to next element on page
-      subSectionElement = subSectionElement.nextElementSibling
+      subSectionElement = subSectionElement.nextElementSibling;
     }
     // If loop has completed without finding subsections, then there are none
     if (!hasSubsections) {
-      let enhancementText = JSON.stringify(section.nextElementSibling.innerText.replace(quoteRegex, ""))
+      let enhancementText = JSON.stringify(
+        section.nextElementSibling.innerText.replace(quoteRegex, "")
+      );
       // Add to output array
-      outputArray.push([releaseNumber, sectionLabel, '', enhancementText])
+      outputArray.push([releaseNumber, sectionLabel, "", enhancementText]);
     }
-  })
-  return outputArray
+  });
+  return outputArray;
 }
 // generateCSV
 function generateCSV(rows) {
