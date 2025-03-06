@@ -27,20 +27,18 @@ const contextMenus = {};
       }
   });
 
-    // Insert Debug Text Field Component
-    contextMenus.replaceNativeComponentsWithWrappers =
-      chrome.contextMenus.create(
-        {
-          "title": "Replace Native Components with Wrappers",
-          "contexts": ["selection"],
-          "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
-        },
-        function(){
-          if(chrome.runtime.lastError){
-            console.log(chrome.runtime.lastError.message)
-          }
-        }
-      )
+  // Replace Native Components with Wrappers
+  chrome.runtime.onInstalled.addListener( () => {
+    chrome.contextMenus.create({
+      id: "replaceNativeComponentsWithWrappers",
+      title: "Replace Native Components with Wrappers",
+      contexts: ["selection"],
+      documentUrlPatterns: ["https://*.appiancloud.us/suite/design/*"]
+    });
+    if(chrome.runtime.lastError){
+      console.log(chrome.runtime.lastError.message)
+    }
+  });
 
     // Convert to/from index function
     contextMenus.convertToOrFromIndexFunction =
@@ -93,10 +91,13 @@ function contextMenuHandler(info, tab){
         console.error("Error executing script:", error)
       });
       break;
-    case contextMenus.replaceNativeComponentsWithWrappers:
-      chrome.tabs.executeScript({
-        file: 'js/replaceNativeComponentsWithWrappers.js'
-      })
+    case "replaceNativeComponentsWithWrappers":
+      chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+        files: ['js/replaceNativeComponentsWithWrappers.js']
+      }).catch((error) => {
+        console.error("Error executing script:", error)
+      });
       break;
     case contextMenus.insertDebugTextField:
       chrome.tabs.executeScript({
