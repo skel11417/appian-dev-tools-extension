@@ -41,19 +41,18 @@ const contextMenus = {};
   });
 
     // Convert to/from index function
-    contextMenus.convertToOrFromIndexFunction =
-      chrome.contextMenus.create(
-        {
-          "title": "Convert to/from index function",
-          "contexts": ["selection"],
-          "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
-        },
-        function(){
-          if(chrome.runtime.lastError){
-            console.log(chrome.runtime.lastError.message)
-          }
-        }
-      )
+    chrome.runtime.onInstalled.addListener( () => {
+      chrome.contextMenus.create({
+        id: "convertToOrFromIndexFunction",
+        title: "Convert to/from index function",
+        contexts: ["selection"],
+        documentUrlPatterns: ["https://*.appiancloud.us/suite/design/*"]
+      });
+      if(chrome.runtime.lastError){
+        console.log(chrome.runtime.lastError.message)
+      }
+    });
+
 
     // Insert Debug Text Field Component
     contextMenus.insertDebugTextField =
@@ -99,16 +98,20 @@ function contextMenuHandler(info, tab){
         console.error("Error executing script:", error)
       });
       break;
+    case "convertToOrFromIndexFunction":
+      chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+        files: ['js/convertToOrFromIndexFunction.js']
+      }).catch((error) => {
+        console.error("Error executing script:", error)
+      });
+    break;
     case contextMenus.insertDebugTextField:
       chrome.tabs.executeScript({
         file: 'js/insertDebugTextField.js'
       })
       break;
-    case contextMenus.convertToOrFromIndexFunction:
-      chrome.tabs.executeScript({
-        file: 'js/convertToOrFromIndexFunction.js'
-      })
-      break;
+
     // default:
   }
 }
