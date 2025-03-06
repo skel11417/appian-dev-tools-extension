@@ -2,19 +2,17 @@
 const contextMenus = {};
 
 // Create Rule Comments
-contextMenus.generateRuleComments =
-  chrome.contextMenus.create(
-    {
-      "title": "Generate Rule Comments",
-      "contexts": ["editable","page"],
+  chrome.runtime.onInstalled.addListener( () => {
+    chrome.contextMenus.create({
+      id: "generateRuleComments",
+      title: "Generate Rule Comments",
+      contexts: ["editable", "page"],
       "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
-    },
-    function(){
-      if(chrome.runtime.lastError){
-        console.log(chrome.runtime.lastError.message)
-      }
+    });
+    if(chrome.runtime.lastError){
+      console.log(chrome.runtime.lastError.message)
     }
-  )
+  })
 
   // Create Changelog Entry
   contextMenus.generateChangeLogEntry =
@@ -81,10 +79,13 @@ contextMenus.generateRuleComments =
 // contextMenuHandler
 function contextMenuHandler(info, tab){
   switch (info.menuItemId) {
-    case contextMenus.generateRuleComments:
-      chrome.tabs.executeScript({
-        file: 'js/generateRuleComments.js'
-      })
+    case "generateRuleComments":
+      chrome.scripting.executeScript({
+        target: { tabId: tab.id},
+        files: ['js/generateRuleComments.js']
+      }).catch((error) => {
+        console.error("Error executing script:", error)
+      });
       break;
     case contextMenus.generateChangeLogEntry:
       chrome.tabs.executeScript({
