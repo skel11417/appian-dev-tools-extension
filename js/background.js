@@ -7,27 +7,25 @@ const contextMenus = {};
       id: "generateRuleComments",
       title: "Generate Rule Comments",
       contexts: ["editable", "page"],
-      "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
+      documentUrlPatterns: ["https://*.appiancloud.us/suite/design/*"]
     });
     if(chrome.runtime.lastError){
       console.log(chrome.runtime.lastError.message)
     }
-  })
+  });
 
   // Create Changelog Entry
-  contextMenus.generateChangeLogEntry =
-    chrome.contextMenus.create(
-      {
-        "title": "Generate Changelog Entry",
-        "contexts": ["editable","page"],
-        "documentUrlPatterns": ["https://*.appiancloud.us/suite/design/*"]
-      },
-      function(){
-        if(chrome.runtime.lastError){
-          console.log(chrome.runtime.lastError.message)
-        }
+  chrome.runtime.onInstalled.addListener( () => {
+    chrome.contextMenus.create({
+        id: "generateChangelogEntry",
+        title: "Generate Changelog Entry",
+        contexts: ["editable","page"],
+        documentUrlPatterns: ["https://*.appiancloud.us/suite/design/*"]
+      });
+      if(chrome.runtime.lastError){
+        console.log(chrome.runtime.lastError.message)
       }
-    )
+  });
 
     // Insert Debug Text Field Component
     contextMenus.replaceNativeComponentsWithWrappers =
@@ -87,10 +85,13 @@ function contextMenuHandler(info, tab){
         console.error("Error executing script:", error)
       });
       break;
-    case contextMenus.generateChangeLogEntry:
-      chrome.tabs.executeScript({
-        file: 'js/generateChangeLogEntry.js'
-      })
+    case "generateChangelogEntry":
+      chrome.scripting.executeScript({
+        target: {tabId: tab.id},
+        files: ['js/generateChangeLogEntry.js']
+      }).catch((error) => {
+        console.error("Error executing script:", error)
+      });
       break;
     case contextMenus.replaceNativeComponentsWithWrappers:
       chrome.tabs.executeScript({
