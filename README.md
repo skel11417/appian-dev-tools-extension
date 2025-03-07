@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 5.0
+* **Manifest Update**: The extension now runs on manifest V3. Manifest V3 introduces several important changes to improve security, performance, and privacy. Most importantly V2 has been deprecated and the extension was no longer allowed to run by Chrome
+
 ### Version 4.1
 * **Useful Links**: Added *Create New Rule* and *Create New Interface* links to open a blank rule/interface in a new tab
 
