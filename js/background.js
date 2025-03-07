@@ -118,23 +118,32 @@ function contextMenuHandler(info, tab){
 chrome.contextMenus.onClicked.addListener(contextMenuHandler)
 
 // Open new tab and show rfr
-chrome.runtime.onMessage.addListener(function (message){
+chrome.runtime.onMessage.addListener(async (message) => {
   if (message.type === "openRFREditor") {
-    chrome.tabs.create(
-      { url: chrome.runtime.getURL("rfr_editor.html") },
-      function ( tab ) {
-        var handler = function(tabId, changeInfo) {
-          if(tabId === tab.id && changeInfo.status === "complete"){
-            chrome.tabs.onUpdated.removeListener(handler);
-            chrome.tabs.sendMessage(tabId, {rfrId: message.rfrId});
-          }
-        }
-        // in case we're faster than page load (usually):
-      chrome.tabs.onUpdated.addListener(handler);
-      // just in case we're too late with the listener:
-      chrome.tabs.sendMessage(tab.id, {rfrId: message.rfrId});
+      try {
+          // Open a new tab and get the tab object
+          const tab = await chrome.tabs.create({
+              url: chrome.runtime.getURL("rfr_editor.html")
+          });
+
+          // Add a listener for when the tab is fully loaded
+          const handler = (tabId, changeInfo) => {
+            if (tabId === tab.id && changeInfo.status === "complete") {
+                chrome.tabs.onUpdated.removeListener(handler);
+
+              // Inject the content script if needed
+              if (tabId === tab.id && changeInfo.status === "complete") {
+                chrome.tabs.onUpdated.removeListener(handler);
+                chrome.tabs.sendMessage(tab.id, { rfrId: message.rfrId });
+              }
+            }
+          };
+
+          // Add the onUpdated listener
+          chrome.tabs.onUpdated.addListener(handler);
+
+      } catch (error) {
+          console.error("Error creating tab:", error);
       }
-    );
   }
-}
-)
+});
