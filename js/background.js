@@ -126,20 +126,17 @@ chrome.runtime.onMessage.addListener(async (message) => {
               url: chrome.runtime.getURL("rfr_editor.html")
           });
 
-          // Add a listener for when the tab is fully loaded
           const handler = (tabId, changeInfo) => {
+            // Execute script on tab load
             if (tabId === tab.id && changeInfo.status === "complete") {
-                chrome.tabs.onUpdated.removeListener(handler);
-
-              // Inject the content script if needed
-              if (tabId === tab.id && changeInfo.status === "complete") {
-                chrome.tabs.onUpdated.removeListener(handler);
-                chrome.tabs.sendMessage(tab.id, { rfrId: message.rfrId });
-              }
+              // Remove listener to prevent memory leak
+              chrome.tabs.onUpdated.removeListener(handler);
+              // Send message to tab
+              chrome.tabs.sendMessage(tab.id, { rfrId: message.rfrId });
             }
           };
 
-          // Add the onUpdated listener
+          // Add the onUpdated listener back
           chrome.tabs.onUpdated.addListener(handler);
 
       } catch (error) {
