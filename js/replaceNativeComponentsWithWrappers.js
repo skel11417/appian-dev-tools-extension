@@ -38,7 +38,7 @@ function replaceNativeComponents() {
            'a!forEach', ' a!gaugeField', 'a!map', 'a!lineChartField', 'a!barChartField',
             'a!pieChartField', 'a!isNullOrEmpty', 'a!isNotNullOrEmpty', 'a!pagingInfo',
             'a!queryFilter', 'a!queryLogicalExpression', 'a!refreshVariable', 'a!refreshValue',
-            'a!defaultValue'
+            'a!defaultValue', 'a!match', 'a!gridField'
           ]
         let replaceableComponents = nativeComponents.filter(component => !COMPONENTS_WITHOUT_WRAPPERS.includes(component))
 
