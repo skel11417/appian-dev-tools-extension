@@ -85,6 +85,9 @@
 3. Integration with Jira API
 ---
 ## Changelog
+### Version 5.1
+* Updated Document Release Notes to handle Appian's monthly releases
+
 ### Version 5.0
 * **Manifest Update**: The extension now runs on manifest V3. Manifest V3 introduces several important changes to improve security, performance, and privacy. Most importantly V2 has been deprecated and the extension was no longer allowed to run by Chrome
 
