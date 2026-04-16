@@ -316,7 +316,7 @@ function returnSectionArray() {
     console.log(sectionLabel);
 
     // Loop through all siblings until the end of the list or the next h2 section
-    while (subSectionElement.tagName !== "H2") {
+    while (subSectionElement && subSectionElement.tagName !== "H2") {
       // Section contains h3 subsection
       if (subSectionElement.tagName === "H3") {
         hasSubsections = true;
