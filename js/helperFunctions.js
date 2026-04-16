@@ -294,7 +294,6 @@ function returnSectionArray() {
 
   // Get release number
   const releaseRegex = /\d{2}\.\d/g; // Regex to get the release number
-  const releaseNumber = document.URL.match(releaseRegex)[0]; // hard-coded for now
 
   // Remove Header Links
   const headerLinks = document.getElementsByClassName("header-link-wrapper");
@@ -312,7 +311,7 @@ function returnSectionArray() {
     let sectionLabel = section.innerText;
     let subSectionElement = section.nextElementSibling; // Start looping through siblings
     let hasSubsections = false; // Default to false
-
+    let releaseNumber = ''
     console.log(sectionLabel);
 
     // Loop through all siblings until the end of the list or the next h2 section
@@ -326,7 +325,7 @@ function returnSectionArray() {
           "H4"; // must improve on this rule
         let sub2Element =
           subSectionElement.nextElementSibling.nextElementSibling;
-        console.log(subSectionLabel);
+        releaseNumber = subSectionElement.attributes["data-version"].nodeValue;
         if (hasEnhancements) {
           while (
             sub2Element !== undefined &&
@@ -352,6 +351,7 @@ function returnSectionArray() {
         // Section contains an unordered list
       } else if (subSectionElement.tagName === "UL") {
         hasSubsections = true;
+        releaseNumber = subSectionElement.attributes["data-version"].nodeValue;
         let list = Array.from(subSectionElement.children);
         // Process List
         list.forEach((listItem) => {
